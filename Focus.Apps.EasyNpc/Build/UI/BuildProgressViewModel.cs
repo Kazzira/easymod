@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Focus.Apps.EasyNpc.Build.Pipeline;
@@ -33,7 +34,7 @@ public class BuildProgressViewModel<TResult> : IDisposable
 
         model
             .Tasks.TakeUntil(disposed)
-            .ObserveOn(Application.Current.Dispatcher)
+            .ObserveOn(SynchronizationContext.Current!)
             .Subscribe(t =>
             {
                 Tasks.Add(taskViewModelFactory(t));

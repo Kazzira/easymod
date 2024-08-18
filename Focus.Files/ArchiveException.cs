@@ -12,7 +12,4 @@ public class ArchiveException : Exception
 
     public ArchiveException(string? message, Exception? innerException)
         : base(message, innerException) { }
-
-    protected ArchiveException(SerializationInfo info, StreamingContext context)
-        : base(info, context) { }
 }

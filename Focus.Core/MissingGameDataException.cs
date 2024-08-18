@@ -34,9 +34,6 @@ public class MissingGameDataException : Exception
         GameName = gameName;
     }
 
-    protected MissingGameDataException(SerializationInfo info, StreamingContext context)
-        : base(info, context) { }
-
     private static string GetMessage(string gameId)
     {
         return $"Couldn't find {gameId} game data folder";

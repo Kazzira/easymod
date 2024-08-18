@@ -40,9 +40,6 @@ public class MissingRecordException : Exception
         ModName = modName;
     }
 
-    protected MissingRecordException(SerializationInfo info, StreamingContext context)
-        : base(info, context) { }
-
     private static string GetExceptionMessage(
         FormKey formKey,
         string? recordType = null,

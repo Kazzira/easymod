@@ -34,9 +34,6 @@ public class UnsupportedGameException : Exception
         GameName = gameName;
     }
 
-    protected UnsupportedGameException(SerializationInfo info, StreamingContext context)
-        : base(info, context) { }
-
     private static string GetMessage(string gameId)
     {
         return $"Game '{gameId}' is not supported";
