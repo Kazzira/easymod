@@ -1,22 +1,32 @@
 ﻿using Focus.Files;
+using Serilog;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO.Abstractions;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Focus.Apps.EasyNpc.Build.Pipeline
 {
     public class TexturePathExtractionTask : BuildTask<TexturePathExtractionTask.Result>
     {
+        private static readonly IReadOnlyList<string> EmptyTexturePaths = ImmutableList<string>.Empty;
+
         public class Result
         {
+            public IReadOnlyCollection<string> FailedSourcePaths { get; private init; }
             public IReadOnlyCollection<string> TexturePaths { get; private init; }
 
-            public Result(IReadOnlyCollection<string> texturePaths)
+            public Result(
+                IReadOnlyCollection<string> texturePaths,
+                IReadOnlyCollection<string> failedSourcePaths)
             {
                 TexturePaths = texturePaths;
+                FailedSourcePaths = failedSourcePaths;
             }
         }
 
@@ -31,16 +41,18 @@ namespace Focus.Apps.EasyNpc.Build.Pipeline
         private readonly IFileSync fileSync;
         private readonly IFileSystem fs;
         private readonly SharedResourceCopyTask.Result headParts;
+        private readonly ILogger log;
         private readonly PatchSaveTask.Result patch;
 
         public TexturePathExtractionTask(
             IFileSystem fs, IFileSync fileSync, PatchSaveTask.Result patch, SharedResourceCopyTask.Result headParts,
-            FaceGenCopyTask.Result faceGen)
+            FaceGenCopyTask.Result faceGen, ILogger log)
         {
             this.faceGen = faceGen;
             this.fileSync = fileSync;
             this.fs = fs;
             this.headParts = headParts;
+            this.log = log;
             this.patch = patch;
         }
 
@@ -62,19 +74,34 @@ namespace Focus.Apps.EasyNpc.Build.Pipeline
                 })
                 .NotNullOrEmpty()
                 .Select(x => x.PrefixPath("textures"));
-            var extractTasks = meshPaths
-                .Select(path =>
-                {
-                    CancellationToken.ThrowIfCancellationRequested();
-                    return Task.Run(() =>
+            var failedSourcePaths = new ConcurrentBag<string>();
+            var pathsFromMeshes = await meshPaths
+                .ThrottledSelect(
+                    async path =>
                     {
                         NextItemSync(path);
-                        return GetReferencedTexturePaths(fs.Path.Combine(settings.OutputDirectory, path));
-                    });
-                })
-                .ToList();
-            var pathsFromMeshes = await Task
-                .WhenAll(extractTasks)
+                        var absolutePath = fs.Path.Combine(settings.OutputDirectory, path);
+                        using var fileCts =
+                            CancellationTokenSource.CreateLinkedTokenSource(CancellationToken);
+                        var extractionTask = Task.Run(() => GetReferencedTexturePaths(absolutePath, fileCts.Token));
+                        if (settings.TextureExtractionTimeoutSec > 0)
+                            extractionTask = extractionTask
+                                .WithTimeout(
+                                    TimeSpan.FromSeconds(settings.TextureExtractionTimeoutSec),
+                                    () => fileCts.Cancel(), CancellationToken)
+                                .Catch((TimeoutException ex) =>
+                                {
+                                    log.Error(
+                                        "Extracting texture paths from {meshPath} timed out after {timeout} seconds. " +
+                                        "Some textures may be missing from the merge.",
+                                        path, settings.TextureExtractionTimeoutSec);
+                                    failedSourcePaths.Add(path);
+                                    return EmptyTexturePaths;
+                                });
+                        return await extractionTask;
+                    },
+                    new ParallelOptions { CancellationToken = CancellationToken })
+                .ToListAsync()
                 .ConfigureAwait(false);
             var allTexturePaths = pathsFromMeshes
                 .SelectMany(p => p)
@@ -82,7 +109,7 @@ namespace Focus.Apps.EasyNpc.Build.Pipeline
                 .AsParallel()
                 .Select(NormalizeTexturePath)
                 .ToHashSet(PathComparer.Default);
-            return new Result(allTexturePaths);
+            return new Result(allTexturePaths, failedSourcePaths.ToImmutableList());
         }
 
         private static string? GetPathAfter(string path, string search, int offset)
@@ -93,16 +120,19 @@ namespace Focus.Apps.EasyNpc.Build.Pipeline
 
         // Parsing the NIF using nifly would be more accurate - but this is much faster, and it has never been shown
         // to be inaccurate.
-        private async Task<IReadOnlyList<string>> GetReferencedTexturePaths(string nifFileName)
+        private async Task<IReadOnlyList<string>> GetReferencedTexturePaths(
+            string nifFileName, CancellationToken cancellationToken)
         {
             var texturePaths = new List<string>();
             if (!fs.File.Exists(nifFileName))
                 return texturePaths;
             using var _ = fileSync.Lock(nifFileName);
-            var fileText = await fs.File.ReadAllTextAsync(nifFileName).ConfigureAwait(false);
+            var fileText = await fs.File.ReadAllTextAsync(nifFileName, cancellationToken)
+                .ConfigureAwait(false);
             var match = TexturePathExpression.Match(fileText);
             while (match.Success)
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 texturePaths.Add(match.Value);
                 match = match.NextMatch();
             }
