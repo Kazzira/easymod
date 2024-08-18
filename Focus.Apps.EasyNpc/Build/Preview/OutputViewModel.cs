@@ -149,7 +149,7 @@ public class OutputViewModel
         {
             if (!fs.Path.IsPathRooted(settings.OutputDirectory))
                 return false;
-            var root = fs.Path.GetPathRoot(settings.OutputDirectory);
+            var root = fs.Path.GetPathRoot(settings.OutputDirectory)!;
             return !InvalidPathRegex.IsMatch(settings.OutputDirectory[root.Length..]);
         }
         catch (Exception)

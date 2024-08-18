@@ -7,6 +7,7 @@ using Loqui;
 using Moq;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Assets;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Skyrim;
 using Noggog;
@@ -168,7 +169,7 @@ class FakeGroupCache : IGroupCache
     // Moq is too buggy to use a mock for this, but its implementation isn't suitable for use as a "general" test
     // double, which is why it is currently a private inner class.
     class WrappedGroupGetter<T> : IGroupGetter<T>
-        where T : class, ISkyrimMajorRecordGetter
+        where T : class, ISkyrimMajorRecordGetter, ILoquiObject
     {
         public T this[FormKey key] => cache[key];
         public ILoquiRegistration ContainedRecordRegistration =>
@@ -181,8 +182,10 @@ class FakeGroupCache : IGroupCache
         public IMod SourceMod => throw new NotImplementedException();
 
         IReadOnlyCache<IMajorRecordGetter, FormKey> IGroupGetter.RecordCache => cache;
-        IEnumerable<IMajorRecordGetter> IGroupGetter.Records => Records;
+        IEnumerable<ILoquiObject> IGroupCommonGetter.Records => Records;
+
         IMajorRecordGetter IGroupGetter.this[FormKey key] => this[key];
+        IEnumerable<IMajorRecordGetter> IGroupGetter.Records => Records;
 
         private readonly IReadOnlyCache<T, FormKey> cache;
 
@@ -209,6 +212,15 @@ class FakeGroupCache : IGroupCache
         IEnumerator IEnumerable.GetEnumerator()
         {
             return cache.Items.GetEnumerator();
+        }
+
+        public IEnumerable<IAssetLinkGetter> EnumerateAssetLinks(
+            AssetLinkQuery queryCategories,
+            IAssetLinkCache linkCache = null,
+            Type assetType = null
+        )
+        {
+            throw new NotImplementedException();
         }
     }
 }

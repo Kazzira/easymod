@@ -59,14 +59,19 @@ public class MutagenLoadOrderAnalyzer : LoadOrderAnalyzer
                     .Add(
                         AssetKind.Icon,
                         x => x.WorldModel,
-                        x => new[] { x.Icons?.SmallIconFilename, x.Icons?.LargeIconFilename }
+                        x =>
+                            new[]
+                            {
+                                x.Icons?.SmallIconFilename?.DataRelativePath,
+                                x.Icons?.LargeIconFilename.DataRelativePath,
+                            }
                     )
             )
             .For<IArtObjectGetter>(artObject => artObject.Add(AssetKind.Mesh, x => x.Model?.File))
             .For<IHeadPartGetter>(headPart =>
                 headPart
                     .Add(AssetKind.Mesh, x => x.Model?.File)
-                    .Add(AssetKind.Morph, x => x.Parts.Select(p => p.FileName))
+                    .Add(AssetKind.Morph, x => x.Parts.Select(p => p.FileName?.DataRelativePath))
             )
             .For<ITextureSetGetter>(textureSet =>
                 textureSet.Add(
@@ -74,14 +79,14 @@ public class MutagenLoadOrderAnalyzer : LoadOrderAnalyzer
                     x =>
                         new[]
                         {
-                            x.Diffuse,
-                            x.NormalOrGloss,
-                            x.EnvironmentMaskOrSubsurfaceTint,
-                            x.GlowOrDetailMap,
-                            x.Height,
-                            x.Environment,
-                            x.Multilayer,
-                            x.BacklightMaskOrSpecular,
+                            x.Diffuse?.DataRelativePath,
+                            x.NormalOrGloss?.DataRelativePath,
+                            x.EnvironmentMaskOrSubsurfaceTint?.DataRelativePath,
+                            x.GlowOrDetailMap?.DataRelativePath,
+                            x.Height?.DataRelativePath,
+                            x.Environment?.DataRelativePath,
+                            x.Multilayer?.DataRelativePath,
+                            x.BacklightMaskOrSpecular?.DataRelativePath,
                         }
                 )
             )

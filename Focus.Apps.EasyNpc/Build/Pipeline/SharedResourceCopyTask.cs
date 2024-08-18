@@ -116,12 +116,12 @@ public class SharedResourceCopyTask : BuildTask<SharedResourceCopyTask.Result>
             .Mod.Armors.SelectMany(x =>
                 new[]
                 {
-                    x.WorldModel?.Male?.Model?.File,
-                    x.WorldModel?.Male?.Icons?.LargeIconFilename,
-                    x.WorldModel?.Male?.Icons?.SmallIconFilename,
-                    x.WorldModel?.Female?.Model?.File,
-                    x.WorldModel?.Female?.Icons?.LargeIconFilename,
-                    x.WorldModel?.Female?.Icons?.SmallIconFilename,
+                    x.WorldModel?.Male?.Model?.File.DataRelativePath,
+                    x.WorldModel?.Male?.Icons?.LargeIconFilename.DataRelativePath,
+                    x.WorldModel?.Male?.Icons?.SmallIconFilename?.DataRelativePath,
+                    x.WorldModel?.Female?.Model?.File.DataRelativePath,
+                    x.WorldModel?.Female?.Icons?.LargeIconFilename.DataRelativePath,
+                    x.WorldModel?.Female?.Icons?.SmallIconFilename?.DataRelativePath,
                 }
             )
             .NotNull();
@@ -133,10 +133,10 @@ public class SharedResourceCopyTask : BuildTask<SharedResourceCopyTask.Result>
             .Mod.ArmorAddons.SelectMany(x =>
                 new[]
                 {
-                    x.FirstPersonModel?.Male?.File,
-                    x.FirstPersonModel?.Female?.File,
-                    x.WorldModel?.Male?.File,
-                    x.WorldModel?.Female?.File,
+                    x.FirstPersonModel?.Male?.File.DataRelativePath,
+                    x.FirstPersonModel?.Female?.File.DataRelativePath,
+                    x.WorldModel?.Male?.File.DataRelativePath,
+                    x.WorldModel?.Female?.File.DataRelativePath,
                 }
             )
             .NotNull();
@@ -144,19 +144,19 @@ public class SharedResourceCopyTask : BuildTask<SharedResourceCopyTask.Result>
 
     private IEnumerable<string> GetArtObjectMeshes()
     {
-        return patch.Mod.ArtObjects.Select(art => art.Model?.File).NotNull();
+        return patch.Mod.ArtObjects.Select(art => art.Model?.File.DataRelativePath).NotNull();
     }
 
     private IEnumerable<string> GetHeadPartMeshes()
     {
-        return patch.Mod.HeadParts.Select(x => x.Model?.File).NotNullOrEmpty();
+        return patch.Mod.HeadParts.Select(x => x.Model?.File.DataRelativePath).NotNullOrEmpty();
     }
 
     private IEnumerable<string> GetHeadPartMorphs()
     {
         return patch
             .Mod.HeadParts.SelectMany(x => x.Parts)
-            .Select(x => x.FileName)
+            .Select(x => x.FileName?.DataRelativePath)
             .NotNullOrEmpty();
     }
 }

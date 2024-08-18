@@ -1917,7 +1917,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                     "MarriageExcludedFaction"
                 )
                 // Faction ranks appear signed in xEdit, but Mutagen uses a byte type?
-                .Zip(new byte[] { 1, 0, 2 })
+                .Zip(new sbyte[] { 1, 0, 2 })
                 .Select(x => new RankPlacement
                 {
                     Faction = x.First.ToLink<IFactionGetter>(),

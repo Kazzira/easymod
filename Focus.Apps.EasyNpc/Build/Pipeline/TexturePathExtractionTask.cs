@@ -75,14 +75,14 @@ public class TexturePathExtractionTask : BuildTask<TexturePathExtractionTask.Res
             .Mod.TextureSets.SelectMany(x =>
                 new[]
                 {
-                    x.Diffuse,
-                    x.NormalOrGloss,
-                    x.EnvironmentMaskOrSubsurfaceTint,
-                    x.GlowOrDetailMap,
-                    x.Height,
-                    x.Environment,
-                    x.Multilayer,
-                    x.BacklightMaskOrSpecular,
+                    x.Diffuse?.DataRelativePath,
+                    x.NormalOrGloss?.DataRelativePath,
+                    x.EnvironmentMaskOrSubsurfaceTint?.DataRelativePath,
+                    x.GlowOrDetailMap?.DataRelativePath,
+                    x.Height?.DataRelativePath,
+                    x.Environment?.DataRelativePath,
+                    x.Multilayer?.DataRelativePath,
+                    x.BacklightMaskOrSpecular?.DataRelativePath,
                 }
             )
             .NotNullOrEmpty()

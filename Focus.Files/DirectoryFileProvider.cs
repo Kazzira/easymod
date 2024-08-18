@@ -22,7 +22,7 @@ public class DirectoryFileProvider : IFileProvider
 
     public ulong GetSize(string fileName)
     {
-        var fi = fs.FileInfo.FromFileName(fs.Path.Combine(rootPath, fileName));
+        var fi = fs.FileInfo.New(fs.Path.Combine(rootPath, fileName));
         return fi.Exists ? (ulong)fi.Length : 0;
     }
 

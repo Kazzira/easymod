@@ -223,7 +223,7 @@ public class PostBuildReportGenerator
                 .ToList();
             faceGenArchivePath = mergedFaceGens
                 .Where(x => !string.IsNullOrEmpty(x.ArchiveName))
-                .Select(x => fs.Path.Combine(mergeComponent.Path, x.ArchiveName))
+                .Select(x => fs.Path.Combine(mergeComponent.Path, x.ArchiveName!))
                 .FirstOrDefault();
             faceGenLoosePath = mergedFaceGens
                 .Where(x => string.IsNullOrEmpty(x.ArchiveName))
@@ -234,7 +234,7 @@ public class PostBuildReportGenerator
                 .ToList();
             faceTintArchivePath = mergedFaceTints
                 .Where(x => !string.IsNullOrEmpty(x.ArchiveName))
-                .Select(x => fs.Path.Combine(mergeComponent.Path, x.ArchiveName))
+                .Select(x => fs.Path.Combine(mergeComponent.Path, x.ArchiveName!))
                 .FirstOrDefault();
             faceTintLoosePath = mergedFaceTints
                 .Where(x => string.IsNullOrEmpty(x.ArchiveName))
@@ -350,7 +350,7 @@ public class PostBuildReportGenerator
 
     private AssetSource? FindAssetSource(string assetPath, string absoluteGamePath)
     {
-        var targetInfo = fs.FileInfo.FromFileName(absoluteGamePath);
+        var targetInfo = fs.FileInfo.New(absoluteGamePath);
         var allResults = modRepository.SearchForFiles(assetPath, false).ToList();
         if (allResults.Count == 1)
             return ResultToSource(allResults[0]);
@@ -360,7 +360,7 @@ public class PostBuildReportGenerator
         {
             var result = allResults[i];
             var resultPath = fs.Path.Combine(result.ModComponent.Path, assetPath);
-            var resultInfo = fs.FileInfo.FromFileName(resultPath);
+            var resultInfo = fs.FileInfo.New(resultPath);
             if (targetInfo.Length != resultInfo.Length)
                 continue;
             if (FileContentsEqual(targetInfo, resultInfo))

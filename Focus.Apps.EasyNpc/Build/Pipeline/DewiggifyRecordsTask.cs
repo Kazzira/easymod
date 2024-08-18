@@ -127,7 +127,7 @@ public class DewiggifyRecordsTask : BuildTask<DewiggifyRecordsTask.Result>
                 new HeadPartInfo
                 {
                     EditorId = headPart.EditorID,
-                    FileName = headPart.Model?.File?.PrefixPath("meshes"),
+                    FileName = headPart.Model?.File?.DataRelativePath.PrefixPath("meshes"),
                 }
             );
     }

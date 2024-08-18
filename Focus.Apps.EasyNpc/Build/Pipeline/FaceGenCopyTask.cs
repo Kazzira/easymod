@@ -98,6 +98,7 @@ public class FaceGenCopyTask : BuildTask<FaceGenCopyTask.Result>
             var outputDirectories = found
                 .Select(x => fs.Path.Combine(settings.OutputDirectory, x.RelativePath))
                 .Select(p => fs.Path.GetDirectoryName(p))
+                .NotNullOrEmpty()
                 .Distinct();
             foreach (var outputDirectory in outputDirectories)
                 fs.Directory.CreateDirectory(outputDirectory);

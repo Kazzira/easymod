@@ -27,7 +27,7 @@ public class GameEnvironmentWrapper<TModSetter, TModGetter>
     public FilePath? CreationClubListingsFilePath => env.CreationClubListingsFilePath;
     public DirectoryPath DataFolderPath => env.DataFolderPath;
     public FilePath LoadOrderFilePath => env.LoadOrderFilePath;
-    public ILoadOrder<IModListing<TModGetter>> LoadOrder => env.LoadOrder;
+    public ILoadOrderGetter<IModListingGetter<TModGetter>> LoadOrder => env.LoadOrder;
     public ILinkCache<TModSetter, TModGetter> LinkCache => env.LinkCache;
 
     ILinkCache IReadOnlyGameEnvironment<TModGetter>.LinkCache => env.LinkCache;

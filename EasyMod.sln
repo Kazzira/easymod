@@ -52,6 +52,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{344D7631-38FB-41FB-A279-BE708E94BCBE}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		Directory.Packages.props = Directory.Packages.props
 		README.md = README.md
 		roll-changelog.ps1 = roll-changelog.ps1
 		update-version.ps1 = update-version.ps1

@@ -202,9 +202,7 @@ public class AssetsViewModel : IDisposable
                 result.RelativePath
             )
             : fs
-                .FileInfo.FromFileName(
-                    fs.Path.Combine(result.ModComponent.Path, result.RelativePath)
-                )
+                .FileInfo.New(fs.Path.Combine(result.ModComponent.Path, result.RelativePath))
                 .Length;
     }
 

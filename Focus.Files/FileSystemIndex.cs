@@ -81,7 +81,7 @@ public sealed class FileSystemIndex : INotifyingBucketedFileIndex, INotifyingFil
         IEnumerable<string>? extensions = null
     )
     {
-        var rootDirectory = fs.DirectoryInfo.FromDirectoryName(rootPath);
+        var rootDirectory = fs.DirectoryInfo.New(rootPath);
         var extensionsSet = extensions?.ToHashSet(StringComparer.CurrentCultureIgnoreCase);
         var initialFiles = rootDirectory.Exists
             ? rootDirectory
@@ -94,7 +94,7 @@ public sealed class FileSystemIndex : INotifyingBucketedFileIndex, INotifyingFil
         IFileSystemWatcher? watcher = null;
         if (rootDirectory.Exists)
         {
-            watcher = fs.FileSystemWatcher.CreateNew(rootDirectory.FullName);
+            watcher = fs.FileSystemWatcher.New(rootDirectory.FullName);
             foreach (var ext in extensionsSet ?? Enumerable.Empty<string>())
                 watcher.Filters.Add("*" + ext);
             watcher.NotifyFilter = NotifyFilters.FileName;

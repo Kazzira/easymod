@@ -11,7 +11,7 @@ public interface IReadOnlyGameEnvironment<TModGetter>
     DirectoryPath DataFolderPath { get; }
     FilePath LoadOrderFilePath { get; }
     FilePath? CreationClubListingsFilePath { get; }
-    public ILoadOrder<IModListing<TModGetter>> LoadOrder { get; }
+    public ILoadOrderGetter<IModListingGetter<TModGetter>> LoadOrder { get; }
     public ILinkCache LinkCache { get; }
 }
 

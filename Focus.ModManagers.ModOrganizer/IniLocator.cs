@@ -24,7 +24,7 @@ public class IniLocator
     public string DetectIniPath(string exePath)
     {
         var portableOverridePath = fs.Path.Combine(
-            fs.Path.GetDirectoryName(exePath),
+            fs.Path.GetDirectoryName(exePath) ?? "",
             "portable.txt"
         );
         var instanceName = !fs.File.Exists(portableOverridePath) ? GetCurrentInstanceName() : null;

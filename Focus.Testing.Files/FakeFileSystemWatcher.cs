@@ -9,8 +9,9 @@ namespace Focus.Testing.Files;
 
 public class FakeFileSystemWatcher : IFileSystemWatcher
 {
-    public bool IncludeSubdirectories { get; set; }
+    public IContainer Container => null;
     public bool EnableRaisingEvents { get; set; }
+    public IFileSystem FileSystem => throw new NotImplementedException();
     public string Filter
     {
         get => Filters.FirstOrDefault();
@@ -21,7 +22,7 @@ public class FakeFileSystemWatcher : IFileSystemWatcher
         }
     }
     public Collection<string> Filters { get; } = new();
-
+    public bool IncludeSubdirectories { get; set; }
     public int InternalBufferSize { get; set; }
     public bool IsDisposed { get; private set; }
     public NotifyFilters NotifyFilter { get; set; }
@@ -91,12 +92,17 @@ public class FakeFileSystemWatcher : IFileSystemWatcher
         );
     }
 
-    public WaitForChangedResult WaitForChanged(WatcherChangeTypes changeType)
+    public IWaitForChangedResult WaitForChanged(WatcherChangeTypes changeType)
     {
         throw new NotImplementedException();
     }
 
-    public WaitForChangedResult WaitForChanged(WatcherChangeTypes changeType, int timeout)
+    public IWaitForChangedResult WaitForChanged(WatcherChangeTypes changeType, int timeout)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IWaitForChangedResult WaitForChanged(WatcherChangeTypes changeType, TimeSpan timeout)
     {
         throw new NotImplementedException();
     }
