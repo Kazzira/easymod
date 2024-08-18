@@ -2074,7 +2074,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
 
         npc.AIData = new AIData
         {
-            Aggression = Aggression.Unagressive,
+            Aggression = Aggression.Unaggressive,
             AggroRadiusBehavior = true,
             Assistance = Assistance.HelpsAllies,
             Attack = 5,
