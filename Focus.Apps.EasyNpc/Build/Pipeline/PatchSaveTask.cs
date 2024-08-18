@@ -71,7 +71,7 @@ public class PatchSaveTask : BuildTask<PatchSaveTask.Result>
     {
         var loadOrder = gameSettings.PluginLoadOrder.Select(x => ModKey.FromNameAndExtension(x));
         using var stream = fs.File.Create(outputPath);
-        mod.WriteToBinaryParallel(
+        mod.WriteToBinary(
             stream,
             new BinaryWriteParameters
             {

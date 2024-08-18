@@ -26,7 +26,7 @@ public class DummyPluginBuilder : IDummyPluginBuilder
     {
         var modKey = ModKey.FromNameAndExtension(Path.GetFileName(path));
         var dummyMod = new SkyrimMod(modKey, game.GameRelease.ToSkyrimRelease());
-        dummyMod.ModHeader.Flags |= SkyrimModHeader.HeaderFlag.Light;
+        dummyMod.ModHeader.Flags |= SkyrimModHeader.HeaderFlag.Small;
         dummyMod.WriteToBinary(path);
     }
 }
