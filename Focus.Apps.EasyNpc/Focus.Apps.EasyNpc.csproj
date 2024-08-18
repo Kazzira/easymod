@@ -36,35 +36,35 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="8.0.0" />
-    <PackageReference Include="AutofacSerilogIntegration" Version="5.0.0" />
-    <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="Fody" Version="6.8.1">
+    <PackageReference Include="Autofac" />
+    <PackageReference Include="AutofacSerilogIntegration" />
+    <PackageReference Include="CommandLineParser" />
+    <PackageReference Include="Fody">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="FontAwesome5" Version="2.1.11" />
-    <PackageReference Include="MathConverter" Version="2.2.1">
+    <PackageReference Include="FontAwesome5" />
+    <PackageReference Include="MathConverter">
       <NoWarn>NU1701</NoWarn>
     </PackageReference>
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.122" />
-    <PackageReference Include="ModernWpfUI" Version="0.9.6" />
-    <PackageReference Include="Mutagen.Bethesda.Core.Windows" Version="0.36.3" />
-    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.39.4" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="niflysharp" Version="1.3.0" />
-    <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
-    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0">
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" />
+    <PackageReference Include="ModernWpfUI" />
+    <PackageReference Include="Mutagen.Bethesda.Core.Windows" />
+    <PackageReference Include="Mutagen.Bethesda.Skyrim" />
+    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="niflysharp" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" />
+    <PackageReference Include="PropertyChanged.Fody">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Serilog" Version="2.11.0" />
-    <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
-    <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
-    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageReference Include="System.IO.Abstractions" Version="17.2.1" />
-    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.8" />
-    <PackageReference Include="System.Security.Permissions" Version="8.0.0" />
+    <PackageReference Include="Serilog" />
+    <PackageReference Include="Serilog.Enrichers.Thread" />
+    <PackageReference Include="Serilog.Sinks.Debug" />
+    <PackageReference Include="Serilog.Sinks.File" />
+    <PackageReference Include="System.IO.Abstractions" />
+    <PackageReference Include="System.Linq.Async" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" />
+    <PackageReference Include="System.Security.Permissions" />
   </ItemGroup>
 
   <ItemGroup>
