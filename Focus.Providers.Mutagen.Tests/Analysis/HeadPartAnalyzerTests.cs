@@ -11,20 +11,27 @@ namespace Focus.Providers.Mutagen.Tests.Analysis
 {
     public class HeadPartAnalyzerTests : CommonAnalyzerFacts<HeadPartAnalyzer, HeadPart, HeadPartAnalysis>
     {
-        public static IEnumerable<object[]> RaceExtractionData => new[]
+        public static TheoryData<string[], VanillaRace[]> RaceExtractionData => new()
         {
-            new object[]
             {
-                new string[] { "NordRace", "ImperialRace", "RedguardRace", "ElderRace", },
-                new VanillaRace[] { VanillaRace.Nord, VanillaRace.Imperial, VanillaRace.Redguard, VanillaRace.Elder },
+                ["NordRace", "ImperialRace", "RedguardRace", "ElderRace"],
+                [VanillaRace.Nord, VanillaRace.Imperial, VanillaRace.Redguard, VanillaRace.Elder]
             },
-            new object[] { new [] { "BretonRace" }, new[] { VanillaRace.Breton } },
-            new object[] { new [] { "HighElfRace" }, new[] { VanillaRace.HighElf } },
-            new object[] { new [] { "DarkElfRace" }, new[] { VanillaRace.DarkElf } },
-            new object[]
             {
-                new string[] { "WoodElfRace", "OrcRace", "UnknownRace" },
-                new VanillaRace[] { VanillaRace.WoodElf, VanillaRace.Orc },
+                ["BretonRace"],
+                [VanillaRace.Breton]
+            },
+            {
+                ["HighElfRace"],
+                [VanillaRace.HighElf]
+            },
+            {
+                ["DarkElfRace"],
+                [VanillaRace.DarkElf]
+            },
+            {
+                ["WoodElfRace", "OrcRace", "UnknownRace"],
+                [VanillaRace.WoodElf, VanillaRace.Orc]
             },
         };
 
@@ -78,7 +85,7 @@ namespace Focus.Providers.Mutagen.Tests.Analysis
             });
             var analysis = Analyzer.Analyze("mod.esp", headPartKeys[0]);
 
-            Assert.Equal(resolvedRaces, analysis.ValidVanillaRaces);
+            Assert.Equal(resolvedRaces, analysis.ValidVanillaRaces.OrderBy(race => race));
         }
 
         [Fact]
