@@ -13,16 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Focus.Apps.EasyNpc.Reports
+namespace Focus.Apps.EasyNpc.Reports;
+
+/// <summary>
+/// Interaction logic for StartupReport.xaml
+/// </summary>
+public partial class StartupReport : UserControl
 {
-    /// <summary>
-    /// Interaction logic for StartupReport.xaml
-    /// </summary>
-    public partial class StartupReport : UserControl
+    public StartupReport()
     {
-        public StartupReport()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

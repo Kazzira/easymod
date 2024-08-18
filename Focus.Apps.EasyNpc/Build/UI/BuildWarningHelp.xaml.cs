@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Windows.Controls;
 
-namespace Focus.Apps.EasyNpc.Build.UI
+namespace Focus.Apps.EasyNpc.Build.UI;
+
+/// <summary>
+/// Interaction logic for BuildWarningHelp.xaml
+/// </summary>
+public partial class BuildWarningHelp : UserControl
 {
-    /// <summary>
-    /// Interaction logic for BuildWarningHelp.xaml
-    /// </summary>
-    public partial class BuildWarningHelp : UserControl
+    public BuildWarningHelp()
     {
-        public BuildWarningHelp()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

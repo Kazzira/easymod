@@ -1,10 +1,11 @@
 ﻿using System;
 
-namespace Focus.Apps.EasyNpc.Messages
+namespace Focus.Apps.EasyNpc.Messages;
+
+public interface IMessageBus
 {
-    public interface IMessageBus
-    {
-        void Send<T>(T message) where T : notnull;
-        void Subscribe<T>(Action<T> handler) where T : notnull;
-    }
+    void Send<T>(T message)
+        where T : notnull;
+    void Subscribe<T>(Action<T> handler)
+        where T : notnull;
 }

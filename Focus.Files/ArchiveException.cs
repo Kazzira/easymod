@@ -1,24 +1,18 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Focus.Files
+namespace Focus.Files;
+
+public class ArchiveException : Exception
 {
-    public class ArchiveException : Exception
-    {
-        public ArchiveException()
-        {
-        }
+    public ArchiveException() { }
 
-        public ArchiveException(string? message) : base(message)
-        {
-        }
+    public ArchiveException(string? message)
+        : base(message) { }
 
-        public ArchiveException(string? message, Exception? innerException) : base(message, innerException)
-        {
-        }
+    public ArchiveException(string? message, Exception? innerException)
+        : base(message, innerException) { }
 
-        protected ArchiveException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
-    }
+    protected ArchiveException(SerializationInfo info, StreamingContext context)
+        : base(info, context) { }
 }

@@ -3,12 +3,17 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0-windows10.0.19041</TargetFramework>
+    <LangVersion>latest</LangVersion>
     <AssemblyName>MugPrep</AssemblyName>
     <NoWarn>MSB3246</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" />
+    <PackageReference Include="CSharpier.MsBuild">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Mutagen.Bethesda" />
     <PackageReference Include="Mutagen.Bethesda.Core.Windows" />
     <PackageReference Include="Mutagen.Bethesda.Skyrim" />

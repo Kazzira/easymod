@@ -13,16 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Focus.Apps.EasyNpc
+namespace Focus.Apps.EasyNpc;
+
+/// <summary>
+/// Interaction logic for TaskBubble.xaml
+/// </summary>
+public partial class TaskBubble : UserControl
 {
-    /// <summary>
-    /// Interaction logic for TaskBubble.xaml
-    /// </summary>
-    public partial class TaskBubble : UserControl
+    public TaskBubble()
     {
-        public TaskBubble()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

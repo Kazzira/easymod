@@ -51,6 +51,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Focus.ModManagers.Vortex.Te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{344D7631-38FB-41FB-A279-BE708E94BCBE}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		README.md = README.md
 		roll-changelog.ps1 = roll-changelog.ps1
 		update-version.ps1 = update-version.ps1
@@ -64,7 +65,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{
 		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Focus.Apps.EasyNpc.Tests", "Focus.Apps.EasyNpc.Tests\Focus.Apps.EasyNpc.Tests.csproj", "{A2964293-EA85-4C5A-B3EB-2E78B8B3B732}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Focus.Apps.EasyNpc.Tests", "Focus.Apps.EasyNpc.Tests\Focus.Apps.EasyNpc.Tests.csproj", "{A2964293-EA85-4C5A-B3EB-2E78B8B3B732}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

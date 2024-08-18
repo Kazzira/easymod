@@ -13,16 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Focus.Apps.EasyNpc.Reports
+namespace Focus.Apps.EasyNpc.Reports;
+
+/// <summary>
+/// Interaction logic for InvalidReferences.xaml
+/// </summary>
+public partial class InvalidReferences : UserControl
 {
-    /// <summary>
-    /// Interaction logic for InvalidReferences.xaml
-    /// </summary>
-    public partial class InvalidReferences : UserControl
+    public InvalidReferences()
     {
-        public InvalidReferences()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

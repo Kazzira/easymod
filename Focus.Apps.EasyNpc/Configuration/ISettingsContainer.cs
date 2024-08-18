@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace Focus.Apps.EasyNpc.Configuration
+namespace Focus.Apps.EasyNpc.Configuration;
+
+public interface ISettingsContainer
 {
-    public interface ISettingsContainer
-    {
-        SettingsViewModel Settings { get; }
-    }
+    SettingsViewModel Settings { get; }
 }
