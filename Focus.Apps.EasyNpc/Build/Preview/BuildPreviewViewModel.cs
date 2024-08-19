@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Reactive.Linq;
+﻿using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Focus.Analysis.Execution;
 using Focus.Apps.EasyNpc.Messages;

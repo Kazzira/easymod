@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reactive.Linq;
+﻿using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Focus.Apps.EasyNpc.Build.Pipeline;
 using PropertyChanged;

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Xunit;
+﻿using Xunit;
 
 namespace Focus.Core.Tests;
 
@@ -29,7 +27,7 @@ public class EnumerableTests
         [Fact]
         public void ProjectsNullSequence()
         {
-            IEnumerable<string> nullSequence = null;
+            IEnumerable<string>? nullSequence = null;
             Assert.Null(nullSequence.OrderBySafe(x => x));
         }
 
@@ -45,8 +43,8 @@ public class EnumerableTests
         [Fact]
         public void WhenBothSequencesNull_IsTrue()
         {
-            IEnumerable<int> lhs = null;
-            IEnumerable<int> rhs = null;
+            IEnumerable<int>? lhs = null;
+            IEnumerable<int>? rhs = null;
             Assert.True(lhs.SequenceEqualSafe(rhs));
         }
 
@@ -59,7 +57,7 @@ public class EnumerableTests
         [Fact]
         public void WhenLeftSequenceNull_IsFalse()
         {
-            IEnumerable<int> lhs = null;
+            IEnumerable<int>? lhs = null;
             Assert.False(lhs.SequenceEqualSafe(new[] { 4 }));
         }
 

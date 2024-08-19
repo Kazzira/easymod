@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Focus.Analysis.Records;
+﻿using Focus.Analysis.Records;
 using Mutagen.Bethesda.Skyrim;
 using Serilog;
 using Xunit;
@@ -31,7 +30,7 @@ public abstract class CommonAnalyzerFacts<TAnalyzer, TMajorRecord, TAnalysis>
         ),
     };
 
-    protected TAnalyzer Analyzer { get; set; }
+    protected TAnalyzer Analyzer { get; set; } = default!; // Subclasses need to set this in ctor.
     private protected FakeGroupCache Groups { get; private set; }
     protected ILogger Logger { get; private set; }
     private protected FakeReferenceChecker ReferenceChecker { get; private set; }

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.IO.Abstractions.TestingHelpers;
+﻿using System.IO.Abstractions.TestingHelpers;
 using Xunit;
 
 namespace Focus.Files.Tests;

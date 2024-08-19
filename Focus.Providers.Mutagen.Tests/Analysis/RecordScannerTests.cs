@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Focus.Providers.Mutagen.Analysis;
+﻿using Focus.Providers.Mutagen.Analysis;
 using Moq;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Skyrim;

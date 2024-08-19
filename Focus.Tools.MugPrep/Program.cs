@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
-using System.Linq;
 using CommandLine;
 using Focus.Files;
 using Focus.Providers.Mutagen;
@@ -20,7 +17,7 @@ namespace Focus.Tools.MugPrep;
 class Options
 {
     [Option('d', "directory")]
-    public string DirectoryPath { get; set; }
+    public string? DirectoryPath { get; set; }
 
     [Option('c', "fix-cubemaps", Default = true)]
     public bool FixCubeMaps { get; set; }
@@ -134,11 +131,10 @@ class FaceGenProcessor
     private static readonly string DefaultEyeCubeMapPath = @"textures\cubemaps\eyecubemap.dds";
 
     private readonly IGameEnvironment<ISkyrimMod, ISkyrimModGetter> env;
-    private IReadOnlySet<string> eyeNodeNames;
+    private IReadOnlySet<string>? eyeNodeNames;
     private readonly string faceGenDirectory;
     private readonly IFileProvider fileProvider;
-    private readonly IFileSystem fs;
-    private IReadOnlySet<string> faceNodeNames;
+    private IReadOnlySet<string>? faceNodeNames;
     private readonly FaceGenProcessingOptions options;
     private readonly Dictionary<string, SkeletonResolver> skeletonResolvers =
         new(StringComparer.OrdinalIgnoreCase);
@@ -155,7 +151,6 @@ class FaceGenProcessor
     {
         this.env = env;
         this.faceGenDirectory = faceGenDirectory;
-        this.fs = fs;
         this.options = options;
         this.tempFileCache = tempFileCache;
         var gameSelection = new GameSelection(GameRelease.SkyrimSE);
@@ -191,13 +186,22 @@ class FaceGenProcessor
         }
         var race = npc.Race.Resolve(env.LinkCache);
         var skeletalModel = npc.Configuration.Flags.HasFlag(NpcConfiguration.Flag.Female)
-            ? race.SkeletalModel.Female
-            : race.SkeletalModel.Male;
+            ? race.SkeletalModel?.Female
+            : race.SkeletalModel?.Male;
+        if (skeletalModel is null)
+        {
+            Console.WriteLine(
+                $"Race '{race.EditorID}' used by NPC "
+                    + $"{faceGenPath.DirectoryName}/{faceGenPath.LocalFormId} "
+                    + "is missing a skeletal model."
+            );
+            return;
+        }
         var skeletonResolver = GetSkeletonResolver(skeletalModel.File);
         var absolutePath = Path.Combine(faceGenDirectory, faceGenPath.FilePath);
         using var file = new NifFile();
         file.Load(absolutePath);
-        NiNode faceGenNode = null;
+        NiNode? faceGenNode = null;
         foreach (var node in file.GetNodes())
         {
             var nodeName = node.name.get();
@@ -219,9 +223,11 @@ class FaceGenProcessor
         Console.WriteLine($"Processed {faceGenPath.FilePath}");
     }
 
+    [MemberNotNull(nameof(eyeNodeNames))]
+    [MemberNotNull(nameof(faceNodeNames))]
     private void EnsureNodeNames()
     {
-        if (eyeNodeNames != null)
+        if (eyeNodeNames != null && faceNodeNames != null)
             return;
         eyeNodeNames = GetHeadPartNodeNames(HeadPart.TypeEnum.Eyes);
         faceNodeNames = GetHeadPartNodeNames(HeadPart.TypeEnum.Face);
@@ -229,6 +235,7 @@ class FaceGenProcessor
 
     private void FixCubeMaps(NifFile file, NiNode faceGenNode)
     {
+        EnsureNodeNames();
         var eyeShapes = GetChildShapes(file, faceGenNode)
             .Where(x =>
                 x.vertexDesc.HasFlag(VertexFlags.VF_EYEDATA) || eyeNodeNames.Contains(x.name.get())
@@ -245,6 +252,7 @@ class FaceGenProcessor
 
     private void FixFaceTints(NifFile file, NiNode faceGenNode, string modName, string formId)
     {
+        EnsureNodeNames();
         var faceShapes = GetChildShapes(file, faceGenNode)
             .Where(x => faceNodeNames.Contains(x.name.get()));
         foreach (var faceShape in faceShapes)
@@ -319,6 +327,7 @@ class FaceGenProcessor
             .WinningOverrides()
             .Where(x => x.Type == type)
             .Select(x => x.EditorID)
+            .NotNullOrEmpty()
             .ToHashSet();
     }
 
@@ -373,7 +382,7 @@ class SkeletonResolver
         this.worldspaceTransforms = worldspaceTransforms;
     }
 
-    public MatTransform GetWorldspaceTransform(string nodeName)
+    public MatTransform? GetWorldspaceTransform(string nodeName)
     {
         return worldspaceTransforms.TryGetValue(nodeName, out var transform) ? transform : null;
     }

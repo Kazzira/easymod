@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace Focus.Apps.EasyNpc.Build;
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-namespace Focus.Apps.EasyNpc.Build;
+﻿namespace Focus.Apps.EasyNpc.Build;
 
 public class BuildException : Exception
 {

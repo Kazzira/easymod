@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Focus.Analysis.Records;
+﻿using Focus.Analysis.Records;
 using Focus.Providers.Mutagen.Analysis;
 using Loqui;
 using Mutagen.Bethesda;
@@ -57,6 +54,7 @@ public class ReferenceCheckerTests
                             )
                 )
         );
+        Assert.NotNull(follower);
     }
 
     [Fact]
@@ -146,7 +144,7 @@ public class ReferenceCheckerTests
                                                         }
                                                     ),
                                                 };
-                                                d.WorldModel = new GenderedItem<Model>(
+                                                d.WorldModel = new GenderedItem<Model?>(
                                                     maleModel,
                                                     femaleModel
                                                 );
@@ -280,7 +278,7 @@ public class ReferenceCheckerTests
                                                         }
                                                     ),
                                                 };
-                                                d.WorldModel = new GenderedItem<Model>(
+                                                d.WorldModel = new GenderedItem<Model?>(
                                                     maleModel,
                                                     femaleModel
                                                 );
@@ -518,7 +516,7 @@ public class ReferenceCheckerTests
             new ReferenceInfo(
                 record.FormKey.ToRecordKey(),
                 getterType.GetRecordType(),
-                record.EditorID
+                record.EditorID ?? ""
             )
         );
     }

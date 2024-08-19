@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Focus.Apps.EasyNpc.Build;

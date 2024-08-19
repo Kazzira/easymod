@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Focus.ModManagers;
+﻿using Focus.ModManagers;
 
 namespace Focus.Apps.EasyNpc.Profiles;
 

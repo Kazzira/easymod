@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Focus.Apps.EasyNpc.GameData.Files;
+﻿using Focus.Apps.EasyNpc.GameData.Files;
 using Focus.ModManagers;
 
 namespace Focus.Apps.EasyNpc.Reports;

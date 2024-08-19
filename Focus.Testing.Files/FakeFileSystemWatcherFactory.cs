@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
 
 namespace Focus.Testing.Files;
@@ -50,7 +47,7 @@ public class FakeFileSystemWatcherFactory : IFileSystemWatcherFactory
     }
 
     [return: NotNullIfNotNull(nameof(fileSystemWatcher))]
-    public IFileSystemWatcher Wrap(FileSystemWatcher fileSystemWatcher)
+    public IFileSystemWatcher Wrap(FileSystemWatcher? fileSystemWatcher)
     {
         throw new NotImplementedException();
     }

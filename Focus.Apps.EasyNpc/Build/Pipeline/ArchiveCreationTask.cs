@@ -1,6 +1,4 @@
 ﻿using System.IO.Abstractions;
-using System.Linq;
-using System.Threading.Tasks;
 using Focus.Apps.EasyNpc.GameData.Files;
 using Focus.Storage.Archives;
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Focus.Analysis.Execution;
+﻿using Focus.Analysis.Execution;
 using Focus.Analysis.Plugins;
 using Focus.Analysis.Records;
 using Xunit;

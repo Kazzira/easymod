@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
 using Focus.Apps.EasyNpc.Build;
 using Focus.Apps.EasyNpc.Build.Preview;
 using Focus.Apps.EasyNpc.Configuration;

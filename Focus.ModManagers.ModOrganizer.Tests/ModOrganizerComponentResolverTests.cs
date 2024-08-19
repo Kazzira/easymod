@@ -1,7 +1,5 @@
-﻿using System;
-using System.IO.Abstractions.TestingHelpers;
+﻿using System.IO.Abstractions.TestingHelpers;
 using System.Text;
-using System.Threading.Tasks;
 using IniParser.Model;
 using Moq;
 using Xunit;

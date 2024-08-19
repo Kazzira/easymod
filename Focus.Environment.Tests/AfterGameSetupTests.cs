@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Moq;
+﻿using Moq;
 using Xunit;
 
 namespace Focus.Environment.Tests;
@@ -35,8 +33,8 @@ public class AfterGameSetupTests
     [Fact]
     public void WhenCallbacksRegistered_DoesNotInvokeBeforeNotify()
     {
-        string cbResult1 = null;
-        string cbResult2 = null;
+        string? cbResult1 = null;
+        string? cbResult2 = null;
         afterGameSetup.OnValue(x => cbResult1 = x + "1");
         afterGameSetup.OnValue(x => cbResult2 = x + "2");
 
@@ -47,8 +45,8 @@ public class AfterGameSetupTests
     [Fact]
     public void WhenCallbacksRegistered_InvokesAfterExplicitNotify()
     {
-        string cbResult1 = null;
-        string cbResult2 = null;
+        string cbResult1 = "";
+        string cbResult2 = "";
         afterGameSetup.OnValue(x => cbResult1 = x + "1");
         afterGameSetup.OnValue(x => cbResult2 = x + "2");
         afterGameSetup.NotifyValue();
@@ -72,7 +70,7 @@ public class AfterGameSetupTests
     [Fact]
     public void WhenCallbacksRegisteredAfterAlreadyNotified_InvokesImmediately()
     {
-        string cbResult = null;
+        string cbResult = "";
         afterGameSetup.NotifyValue();
         afterGameSetup.OnValue(x => cbResult = x);
 

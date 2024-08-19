@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.IO.Abstractions;
-using System.Threading.Tasks;
 using Focus.Files;
 
 namespace Focus.ModManagers;

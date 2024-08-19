@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
+﻿using System.Drawing;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Skyrim;
 
@@ -68,21 +65,21 @@ class NpcMutations
                 x => x.GiftFilter.SetTo(dummyKey),
                 x => x.GuardWarnOverridePackageList.SetTo(dummyKey),
                 x => x.IsDeleted = true,
-                x => x.Items.RemoveAt(0),
-                x => x.Keywords.RemoveAt(0),
+                x => x.Items!.RemoveAt(0),
+                x => x.Keywords!.RemoveAt(0),
                 x => x.NAM5 = 23,
                 x => x.ObjectBounds.First = new Noggog.P3Int16(1, 2, 3),
                 x => x.ObjectBounds.Second = new Noggog.P3Int16(1, 2, 3),
                 x => x.ObserveDeadBodyOverridePackageList.SetTo(dummyKey),
                 x => x.Packages.RemoveAt(1),
                 x => x.Packages.Move(0, 2),
-                x => x.Perks.RemoveAt(x.Perks.Count - 1),
-                x => x.PlayerSkills.FarAwayModelDistance += 0.123f,
-                x => x.PlayerSkills.Health += 5,
-                x => x.PlayerSkills.Magicka += 8,
-                x => x.PlayerSkills.Stamina -= 4,
-                x => x.PlayerSkills.SkillOffsets[Skill.Enchanting] += 2,
-                x => x.PlayerSkills.SkillValues[Skill.Conjuration] -= 3,
+                x => x.Perks!.RemoveAt(x.Perks.Count - 1),
+                x => x.PlayerSkills!.FarAwayModelDistance += 0.123f,
+                x => x.PlayerSkills!.Health += 5,
+                x => x.PlayerSkills!.Magicka += 8,
+                x => x.PlayerSkills!.Stamina -= 4,
+                x => x.PlayerSkills!.SkillOffsets[Skill.Enchanting] += 2,
+                x => x.PlayerSkills!.SkillValues[Skill.Conjuration] -= 3,
                 // Race is behavior but also other things; needs its own test.
                 x =>
                     x.Sound = new NpcSoundTypes
@@ -92,19 +89,19 @@ class NpcMutations
                 x => x.SoundLevel = GetAlternateValue(x.SoundLevel),
                 x => x.SpectatorOverridePackageList.SetTo(dummyKey),
                 x => x.Template.SetTo(dummyKey),
-                x => x.VirtualMachineAdapter.Clear(),
-                x => x.VirtualMachineAdapter.ObjectFormat++,
+                x => x.VirtualMachineAdapter!.Clear(),
+                x => x.VirtualMachineAdapter!.ObjectFormat++,
                 x =>
-                    x.VirtualMachineAdapter.Scripts[0].Flags |= ScriptEntry
+                    x.VirtualMachineAdapter!.Scripts[0].Flags |= ScriptEntry
                         .Flag
                         .InheritedAndRemoved,
                 x =>
-                    x.VirtualMachineAdapter.Scripts[0].Properties[0] = new ScriptFloatProperty
+                    x.VirtualMachineAdapter!.Scripts[0].Properties[0] = new ScriptFloatProperty
                     {
                         Name = "Prop0",
                         Data = 0.32f,
                     },
-                x => x.VirtualMachineAdapter.Version++,
+                x => x.VirtualMachineAdapter!.Version++,
                 x => x.Voice.SetTo(dummyKey),
             }
         );
@@ -113,11 +110,11 @@ class NpcMutations
         new(
             new Action<Npc>[]
             {
-                x => x.FaceMorph.JawNarrowVsWide += 0.1f,
-                x => x.FaceMorph.NoseLongVsShort += 0.1f,
-                x => x.FaceParts.Eyes++,
-                x => x.FaceParts.Mouth++,
-                x => x.FaceParts.Nose++,
+                x => x.FaceMorph!.JawNarrowVsWide += 0.1f,
+                x => x.FaceMorph!.NoseLongVsShort += 0.1f,
+                x => x.FaceParts!.Eyes++,
+                x => x.FaceParts!.Mouth++,
+                x => x.FaceParts!.Nose++,
                 x => x.HairColor.SetTo(dummyKey),
                 x => x.HeadTexture.SetTo(dummyKey),
                 x => x.TextureLighting = Color.Goldenrod,
@@ -160,11 +157,11 @@ class NpcMutations
             new Action<Npc>[]
             {
                 x => x.AIData.Unused++,
-                x => x.FaceMorph.BrowsUpVsDown += float.Epsilon * 2,
+                x => x.FaceMorph!.BrowsUpVsDown += float.Epsilon * 2,
                 x => x.Height += float.Epsilon * 2,
                 x => x.Weight -= float.Epsilon * 2,
-                x => x.PlayerSkills.Unused += 5,
-                x => x.PlayerSkills.Unused2 = new byte[] { 1, 2, 3 },
+                x => x.PlayerSkills!.Unused += 5,
+                x => x.PlayerSkills!.Unused2 = new byte[] { 1, 2, 3 },
                 x => x.Version2++,
                 x => x.VersionControl++,
             }

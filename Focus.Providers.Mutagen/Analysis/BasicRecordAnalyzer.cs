@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Focus.Analysis;
-using Focus.Analysis.Records;
+﻿using Focus.Analysis.Records;
 using RecordType = Focus.Analysis.Records.RecordType;
 
 namespace Focus.Providers.Mutagen.Analysis;

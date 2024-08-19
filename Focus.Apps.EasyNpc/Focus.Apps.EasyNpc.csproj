@@ -1,18 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+  <Import Project="..\EasyMod.props" />
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <LangVersion>latest</LangVersion>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <RootNamespace>Focus.Apps.EasyNpc</RootNamespace>
     <UseWPF>true</UseWPF>
-    <Nullable>enable</Nullable>
-    <WarningsAsErrors>nullable</WarningsAsErrors>
     <AssemblyName>EasyNPC</AssemblyName>
     <AssemblyTitle>Easy NPC</AssemblyTitle>
-    <Product>EasyMod</Product>
-    <Version>0.9.6</Version>
     <ApplicationIcon>EasyNPC.ico</ApplicationIcon>
     <NoWarn>MSB3246</NoWarn>
   </PropertyGroup>
@@ -41,10 +38,7 @@
     <PackageReference Include="Autofac" />
     <PackageReference Include="AutofacSerilogIntegration" />
     <PackageReference Include="CommandLineParser" />
-    <PackageReference Include="CSharpier.MsBuild">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="FastEnum" />
     <PackageReference Include="Fody">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

@@ -1,15 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
+  <Import Project="..\EasyMod.props" />
 
   <ItemGroup>
-    <PackageReference Include="CSharpier.MsBuild">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="SharpDX" />
     <PackageReference Include="SharpDX.XAudio2" />
   </ItemGroup>

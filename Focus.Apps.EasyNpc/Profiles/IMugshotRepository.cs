@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Focus.Apps.EasyNpc.Profiles;
+﻿namespace Focus.Apps.EasyNpc.Profiles;
 
 public interface IMugshotRepository
 {

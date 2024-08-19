@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Focus.Apps.EasyNpc.Profiles;
+﻿using Focus.Apps.EasyNpc.Profiles;
 
 namespace Focus.Apps.EasyNpc.Build.Checks;
 

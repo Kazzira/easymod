@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reactive.Linq;
+﻿using System.Reactive.Linq;
 using Focus.ModManagers;
 
 namespace Focus.Apps.EasyNpc.Configuration;

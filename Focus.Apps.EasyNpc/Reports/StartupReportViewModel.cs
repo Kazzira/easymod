@@ -1,6 +1,4 @@
-﻿using System;
-using Focus.Analysis.Execution;
-using Focus.Analysis.Plugins;
+﻿using Focus.Analysis.Execution;
 using Focus.Apps.EasyNpc.Profiles;
 
 namespace Focus.Apps.EasyNpc.Reports;

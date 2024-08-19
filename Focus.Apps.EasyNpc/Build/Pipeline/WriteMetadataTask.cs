@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO.Abstractions;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO.Abstractions;
 using Focus.Apps.EasyNpc.Configuration;
 using Newtonsoft.Json;
 

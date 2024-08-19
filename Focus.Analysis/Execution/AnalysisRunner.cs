@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
 using System.Diagnostics;
-using System.Linq;
 using Focus.Analysis.Plugins;
 using Focus.Analysis.Records;
 using Focus.Environment;

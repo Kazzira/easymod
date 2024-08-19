@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Focus.Analysis.Records;
+﻿namespace Focus.Analysis.Records;
 
 public abstract class RecordAnalysisGroup
 {

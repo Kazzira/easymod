@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Concurrent;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading.Tasks;
 using Focus.Apps.EasyNpc.Build.Checks;
 using Focus.Apps.EasyNpc.Configuration;
 using Focus.Apps.EasyNpc.Profiles;

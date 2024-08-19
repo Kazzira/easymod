@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Focus.Analysis.Plugins;
+﻿using Focus.Analysis.Plugins;
 using Focus.Analysis.Records;
 
 namespace Focus.Analysis.Execution;

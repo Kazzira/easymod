@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using PropertyChanged;
+﻿using PropertyChanged;
 
 namespace Focus.Apps.EasyNpc;
 

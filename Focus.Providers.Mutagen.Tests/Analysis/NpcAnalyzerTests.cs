@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
-using System.Linq;
 using Focus.Analysis.Records;
 using Focus.Providers.Mutagen.Analysis;
 using Moq;
@@ -18,7 +16,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
 {
     private readonly Mock<NpcAnalyzer.IArmorAddonHelper> armorAddonHelperMock = new();
 
-    private NpcComparisonDependencies comparisonDependencies;
+    private NpcComparisonDependencies? comparisonDependencies;
 
     public NpcAnalyzerTests()
     {
@@ -609,6 +607,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
         );
         var analysis = Analyzer.Analyze("plugin.esp", npcKeys[0]);
 
+        Assert.NotNull(analysis.WigInfo);
         Assert.True(analysis.WigInfo.IsBald);
     }
 
@@ -643,6 +642,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
         );
         var analysis = Analyzer.Analyze("plugin.esp", npcKeys[0]);
 
+        Assert.NotNull(analysis.WigInfo);
         Assert.True(analysis.WigInfo.IsBald);
     }
 
@@ -671,13 +671,14 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
         );
         var analysis = Analyzer.Analyze("plugin.esp", npcKeys[0]);
 
+        Assert.NotNull(analysis.WigInfo);
         Assert.False(analysis.WigInfo.IsBald);
     }
 
     [Fact]
     public void WhenNpcHasWig_AndWigHasWorldModel_WigInfo_IncludesGenderedModelName()
     {
-        Npc maleNpc = null;
+        Npc? maleNpc = null;
         var npcKeys = Groups.AddRecords<Npc>(
             "plugin.esp",
             npc =>
@@ -687,7 +688,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                     "Dummy",
                     x =>
                     {
-                        x.WorldModel = new GenderedItem<Model>(
+                        x.WorldModel = new GenderedItem<Model?>(
                             new() { File = @"foo/bar/baz/wigmodelmale.nif" },
                             new() { File = @"foo/bar/baz/wigmodelfemale.nif" }
                         );
@@ -697,14 +698,16 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
             },
             x =>
             {
-                x.DeepCopyIn(maleNpc);
+                x.DeepCopyIn(maleNpc!);
                 x.Configuration.Flags |= NpcConfiguration.Flag.Female;
             }
         );
         var maleAnalysis = Analyzer.Analyze("plugin.esp", npcKeys[0]);
         var femaleAnalysis = Analyzer.Analyze("plugin.esp", npcKeys[1]);
 
+        Assert.NotNull(maleAnalysis.WigInfo);
         Assert.Equal("wigmodelmale", maleAnalysis.WigInfo.ModelName);
+        Assert.NotNull(femaleAnalysis.WigInfo);
         Assert.Equal("wigmodelfemale", femaleAnalysis.WigInfo.ModelName);
     }
 
@@ -798,7 +801,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
         // the same as what that NPC would have had anyway, i.e. from the race.
         // Since our fixture NPC already has custom hair, it needs to be removed from the controls.
         void revertHair(Npc npc) =>
-            npc.HeadParts.RemoveAll(x => x.WinnerFrom(Groups).Type == HeadPart.TypeEnum.Hair);
+            npc.HeadParts.RemoveAll(x => x.WinnerFrom(Groups)?.Type == HeadPart.TypeEnum.Hair);
         var npcKeys = Groups.AddRecords<Npc>(
             "master.esp",
             x => SetupNpcForComparison(x, revertHair)
@@ -818,6 +821,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                     {
                         revertHair(npc);
                         var race = npc.Race.WinnerFrom(Groups);
+                        Assert.NotNull(race);
                         npc.HeadParts.Add(
                             GetDefaultHeadPartKey(race, true, HeadPart.TypeEnum.Hair)
                         );
@@ -867,7 +871,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                             }
                         );
                         npc.HeadParts.RemoveAll(x =>
-                            x.WinnerFrom(Groups).Type == HeadPart.TypeEnum.Hair
+                            x.WinnerFrom(Groups)?.Type == HeadPart.TypeEnum.Hair
                         );
                         npc.HeadParts.Add(hairKeys[0].ToFormKey());
                     }
@@ -912,14 +916,12 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                     npc =>
                     {
                         npc.HeadParts.RemoveAll(x =>
-                            x.WinnerFrom(Groups).Type == HeadPart.TypeEnum.Hair
+                            x.WinnerFrom(Groups)?.Type == HeadPart.TypeEnum.Hair
                         );
+                        var race = npc.Race.WinnerFrom(Groups);
+                        Assert.NotNull(race);
                         npc.HeadParts.Add(
-                            GetDefaultHeadPartKey(
-                                npc.Race.WinnerFrom(Groups),
-                                true,
-                                HeadPart.TypeEnum.Hair
-                            )
+                            GetDefaultHeadPartKey(race, true, HeadPart.TypeEnum.Hair)
                         );
                     }
                 )
@@ -949,7 +951,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
     public void WhenHeadPartOverridenWithSameReference_HeadPartComparisons_AreEqual()
     {
         void revertEyes(Npc npc) =>
-            npc.HeadParts.RemoveAll(x => x.WinnerFrom(Groups).Type == HeadPart.TypeEnum.Eyes);
+            npc.HeadParts.RemoveAll(x => x.WinnerFrom(Groups)?.Type == HeadPart.TypeEnum.Eyes);
         var npcKeys = Groups.AddRecords<Npc>(
             "master.esp",
             x => SetupNpcForComparison(x, revertEyes)
@@ -969,6 +971,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                     {
                         revertEyes(npc);
                         var race = npc.Race.WinnerFrom(Groups);
+                        Assert.NotNull(race);
                         npc.HeadParts.Add(
                             GetDefaultHeadPartKey(race, true, HeadPart.TypeEnum.Eyes)
                         );
@@ -1018,7 +1021,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                             }
                         );
                         npc.HeadParts.RemoveAll(x =>
-                            x.WinnerFrom(Groups).Type == HeadPart.TypeEnum.Eyes
+                            x.WinnerFrom(Groups)?.Type == HeadPart.TypeEnum.Eyes
                         );
                         npc.HeadParts.Add(headPartKeys[0].ToFormKey());
                     }
@@ -1059,14 +1062,12 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                     npc =>
                     {
                         npc.HeadParts.RemoveAll(x =>
-                            x.WinnerFrom(Groups).Type == HeadPart.TypeEnum.Eyes
+                            x.WinnerFrom(Groups)?.Type == HeadPart.TypeEnum.Eyes
                         );
+                        var race = npc.Race.WinnerFrom(Groups);
+                        Assert.NotNull(race);
                         npc.HeadParts.Add(
-                            GetDefaultHeadPartKey(
-                                npc.Race.WinnerFrom(Groups),
-                                true,
-                                HeadPart.TypeEnum.Eyes
-                            )
+                            GetDefaultHeadPartKey(race, true, HeadPart.TypeEnum.Eyes)
                         );
                     }
                 )
@@ -1136,7 +1137,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                         // Race edit only matters if the NPC doesn't already override the head parts that would be changed.
                         // For this test, we need to remove the NPC's existing custom hair.
                         npc.HeadParts.RemoveAll(x =>
-                            x.WinnerFrom(Groups).Type == HeadPart.TypeEnum.Hair
+                            x.WinnerFrom(Groups)?.Type == HeadPart.TypeEnum.Hair
                         );
 
                         var oldRace = npc.Race.WinnerFrom(Groups);
@@ -1153,12 +1154,12 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                             r =>
                             {
                                 r.EditorID = "RacyRace";
-                                r.HeadData = new GenderedItem<HeadData>(
-                                    oldRace.HeadData.Male.DeepCopy(),
-                                    oldRace.HeadData.Female.DeepCopy()
+                                r.HeadData = new GenderedItem<HeadData?>(
+                                    oldRace?.HeadData?.Male?.DeepCopy() ?? new HeadData(),
+                                    oldRace?.HeadData?.Female?.DeepCopy() ?? new HeadData()
                                 );
-                                r.HeadData.Female.HeadParts.Single(x =>
-                                        x.Head.WinnerFrom(Groups).Type == HeadPart.TypeEnum.Hair
+                                r.HeadData.Female!.HeadParts.Single(x =>
+                                        x.Head.WinnerFrom(Groups)?.Type == HeadPart.TypeEnum.Hair
                                     )
                                     .Head.SetTo(headPartKeys[0].ToFormKey());
                             }
@@ -1217,12 +1218,12 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                             r =>
                             {
                                 r.EditorID = "RacyRace";
-                                r.HeadData = new GenderedItem<HeadData>(
-                                    oldRace.HeadData.Male.DeepCopy(),
-                                    oldRace.HeadData.Female.DeepCopy()
+                                r.HeadData = new GenderedItem<HeadData?>(
+                                    oldRace?.HeadData?.Male?.DeepCopy() ?? new HeadData(),
+                                    oldRace?.HeadData?.Female?.DeepCopy() ?? new HeadData()
                                 );
-                                r.HeadData.Female.HeadParts.Single(x =>
-                                        x.Head.WinnerFrom(Groups).Type == HeadPart.TypeEnum.Hair
+                                r.HeadData.Female!.HeadParts.Single(x =>
+                                        x.Head.WinnerFrom(Groups)?.Type == HeadPart.TypeEnum.Hair
                                     )
                                     .Head.SetTo(headPartKeys[0].ToFormKey());
                             }
@@ -1278,12 +1279,12 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                             r =>
                             {
                                 r.EditorID = "RacyRace";
-                                r.HeadData = new GenderedItem<HeadData>(
-                                    oldRace.HeadData.Male.DeepCopy(),
-                                    oldRace.HeadData.Female.DeepCopy()
+                                r.HeadData = new GenderedItem<HeadData?>(
+                                    oldRace?.HeadData?.Male?.DeepCopy() ?? new HeadData(),
+                                    oldRace?.HeadData?.Female?.DeepCopy() ?? new HeadData()
                                 );
-                                r.HeadData.Female.HeadParts.Single(x =>
-                                        x.Head.WinnerFrom(Groups).Type == HeadPart.TypeEnum.Face
+                                r.HeadData.Female!.HeadParts.Single(x =>
+                                        x.Head.WinnerFrom(Groups)?.Type == HeadPart.TypeEnum.Face
                                     )
                                     .Head.SetTo(headPartKeys[0].ToFormKey());
                             }
@@ -1347,16 +1348,17 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                             r =>
                             {
                                 r.EditorID = "RacyRace";
-                                r.HeadData = new GenderedItem<HeadData>(
-                                    oldRace.HeadData.Male.DeepCopy(),
-                                    oldRace.HeadData.Female.DeepCopy()
+                                r.HeadData = new GenderedItem<HeadData?>(
+                                    oldRace?.HeadData?.Male?.DeepCopy() ?? new HeadData(),
+                                    oldRace?.HeadData?.Female?.DeepCopy() ?? new HeadData()
                                 );
-                                r.HeadData.Female.HeadParts.Single(x =>
-                                        x.Head.WinnerFrom(Groups).Type == HeadPart.TypeEnum.Eyebrows
+                                r.HeadData.Female!.HeadParts.Single(x =>
+                                        x.Head.WinnerFrom(Groups)?.Type
+                                        == HeadPart.TypeEnum.Eyebrows
                                     )
                                     .Head.SetTo(headPartKeys[0].ToFormKey());
                                 r.HeadData.Female.HeadParts.Single(x =>
-                                        x.Head.WinnerFrom(Groups).Type == HeadPart.TypeEnum.Eyes
+                                        x.Head.WinnerFrom(Groups)?.Type == HeadPart.TypeEnum.Eyes
                                     )
                                     .Head.SetTo(headPartKeys[1].ToFormKey());
                             }
@@ -1491,7 +1493,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                                     r.Skin.SetTo(
                                         changes.Contains(SkinTestChange.ModdedNpcRaceSkin)
                                             ? customSkinKey
-                                            : comparisonDependencies.RaceSkinKey
+                                            : comparisonDependencies!.RaceSkinKey
                                     )
                             );
                             npc.Race.SetTo(newRaceKeys[0].ToFormKey());
@@ -1577,6 +1579,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
         );
         var analysis = Analyzer.Analyze("plugin.esp", npcKeys[0]);
 
+        Assert.NotNull(analysis.TemplateInfo);
         Assert.Equal("123456:plugin.esp", analysis.TemplateInfo.Key.ToString());
         Assert.Equal(NpcTemplateTargetType.Invalid, analysis.TemplateInfo.TargetType);
     }
@@ -1594,6 +1597,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
         );
         var analysis = Analyzer.Analyze("plugin.esp", npcKeys[0]);
 
+        Assert.NotNull(analysis.TemplateInfo);
         Assert.Equal(leveledNpcKeys[0], analysis.TemplateInfo.Key);
         Assert.Equal(NpcTemplateTargetType.LeveledNpc, analysis.TemplateInfo.TargetType);
     }
@@ -1611,6 +1615,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
         );
         var analysis = Analyzer.Analyze("plugin.esp", npcKeys[0]);
 
+        Assert.NotNull(analysis.TemplateInfo);
         Assert.Equal(targetNpcKeys[0], analysis.TemplateInfo.Key);
         Assert.Equal(NpcTemplateTargetType.Npc, analysis.TemplateInfo.TargetType);
     }
@@ -1627,7 +1632,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
         );
         var analysis = Analyzer.Analyze("plugin.esp", npcKeys[0]);
 
-        Assert.False(analysis.TemplateInfo.InheritsTraits);
+        Assert.False(analysis.TemplateInfo?.InheritsTraits);
     }
 
     [Fact]
@@ -1643,7 +1648,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
         );
         var analysis = Analyzer.Analyze("plugin.esp", npcKeys[0]);
 
-        Assert.True(analysis.TemplateInfo.InheritsTraits);
+        Assert.True(analysis.TemplateInfo?.InheritsTraits);
     }
 
     [Theory]
@@ -1714,7 +1719,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                     x,
                     npc =>
                     {
-                        npc.FaceMorph.BrowsForwardVsBack = -0.1f;
+                        npc.FaceMorph!.BrowsForwardVsBack = -0.1f;
                         npc.Height = 0.99f;
                     }
                 )
@@ -1765,7 +1770,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                     x,
                     npc =>
                     {
-                        npc.FaceMorph.BrowsForwardVsBack = -0.1f;
+                        npc.FaceMorph!.BrowsForwardVsBack = -0.1f;
                     }
                 )
         );
@@ -1853,6 +1858,8 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
         Action<NpcComparison> comparisonAssert
     )
     {
+        Assert.NotNull(analysis.ComparisonToBase);
+        Assert.NotNull(analysis.ComparisonToPreviousOverride);
         Assert.Equal(masterPluginName, analysis.ComparisonToBase.PluginName);
         comparisonAssert(analysis.ComparisonToBase);
         Assert.Equal(previousOverridePluginName, analysis.ComparisonToPreviousOverride.PluginName);
@@ -1874,26 +1881,28 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
         return headData;
     }
 
-    private static GenderedItem<HeadData> CreateHeadData(
+    private static GenderedItem<HeadData?> CreateHeadData(
         IEnumerable<FormKey> headPartKeys,
         bool female
     )
     {
         var headData = CreateHeadData(headPartKeys);
         return female
-            ? new GenderedItem<HeadData>(null, headData)
-            : new GenderedItem<HeadData>(headData, null);
+            ? new GenderedItem<HeadData?>(null, headData)
+            : new GenderedItem<HeadData?>(headData, null);
     }
 
     private FormKey GetDefaultHeadPartKey(IRaceGetter race, bool female, HeadPart.TypeEnum type)
     {
-        var headData = female ? race.HeadData.Female : race.HeadData.Male;
+        var headData = female ? race.HeadData?.Female : race.HeadData?.Male;
+        Assert.NotNull(headData);
         return headData
             .HeadParts.Select(x => x.Head)
-            .SingleOrDefault(x => x.WinnerFrom(Groups).Type == type)
+            .Single(x => x.WinnerFrom(Groups)?.Type == type)
             .FormKey;
     }
 
+    [MemberNotNull(nameof(comparisonDependencies))]
     private void SetupNpcComparisonDependencies()
     {
         // NPCs need to reference a lot of other stuff in order to fully test comparisons - factions, races, voices,
@@ -1990,7 +1999,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
                     r =>
                     {
                         r.EditorID = "NordRace";
-                        r.HeadData = new GenderedItem<HeadData>(
+                        r.HeadData = new GenderedItem<HeadData?>(
                             CreateHeadData(
                                 Groups
                                     .AddRecords<HeadPart>(
@@ -2061,7 +2070,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
         SetupNpcForComparison(npc, null);
     }
 
-    private void SetupNpcForComparison(Npc npc, Action<Npc> mutation)
+    private void SetupNpcForComparison(Npc npc, Action<Npc>? mutation)
     {
         SetupNpcComparisonDependencies();
         // Tests for the comparisons, and by extension the defaults being set up here, are not going to be
@@ -2278,7 +2287,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
     private void SetupPositiveWigScenario(
         Npc npc,
         string editorId,
-        Action<ArmorAddon> additionalSetup = null
+        Action<ArmorAddon>? additionalSetup = null
     )
     {
         SetupPositiveWigScenario(npc, null, editorId, additionalSetup);
@@ -2288,7 +2297,7 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
         Npc npc,
         FormKey? raceKey,
         string editorId,
-        Action<ArmorAddon> additionalSetup = null
+        Action<ArmorAddon>? additionalSetup = null
     )
     {
         SetupWigScenario(
@@ -2364,14 +2373,14 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
         public FormKey CombatStyleKey { get; init; }
         public FormKey CrimeFactionKey { get; init; }
         public FormKey DefaultOutfitKey { get; init; }
-        public IReadOnlyList<RankPlacement> FactionRanks { get; init; }
+        public IReadOnlyList<RankPlacement> FactionRanks { get; init; } = [];
         public FormKey HairColorKey { get; init; }
-        public IReadOnlyList<FormKey> HeadPartKeys { get; init; }
+        public IReadOnlyList<FormKey> HeadPartKeys { get; init; } = [];
         public FormKey HeadTextureKey { get; init; }
-        public IReadOnlyList<ContainerEntry> ItemEntries { get; init; }
-        public IReadOnlyList<FormKey> KeywordKeys { get; init; }
-        public IReadOnlyList<FormKey> PackageKeys { get; init; }
-        public IReadOnlyList<PerkPlacement> PerkPlacements { get; init; }
+        public IReadOnlyList<ContainerEntry> ItemEntries { get; init; } = [];
+        public IReadOnlyList<FormKey> KeywordKeys { get; init; } = [];
+        public IReadOnlyList<FormKey> PackageKeys { get; init; } = [];
+        public IReadOnlyList<PerkPlacement> PerkPlacements { get; init; } = [];
         public FormKey SleepOutfitKey { get; init; }
         public FormKey RaceKey { get; init; }
         public FormKey RaceSkinKey { get; init; }
@@ -2380,8 +2389,8 @@ public class NpcAnalyzerTests : CommonAnalyzerFacts<NpcAnalyzer, Npc, NpcAnalysi
 
     class WigSetting
     {
-        public Action<ArmorAddon> AdditionalSetup { get; init; }
-        public string EditorId { get; init; }
+        public Action<ArmorAddon>? AdditionalSetup { get; init; }
+        public string EditorId { get; init; } = "";
         public bool IsDefaultSkin { get; init; }
         public bool ReplacesHair { get; init; }
         public bool SupportsRace { get; init; }

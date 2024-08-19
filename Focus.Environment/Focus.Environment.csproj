@@ -1,20 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
-    <WarningsAsErrors>nullable</WarningsAsErrors>
-    <AssemblyTitle>Game environment (e.g. paths, load orders) library</AssemblyTitle>
-    <Product>EasyMod</Product>
-    <Version>0.1.0</Version>
-  </PropertyGroup>
+  <Import Project="..\EasyMod.props" />
 
-  <ItemGroup>
-    <PackageReference Include="CSharpier.MsBuild">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+  <PropertyGroup>
+    <AssemblyTitle>Game environment (e.g. paths, load orders) library</AssemblyTitle>
+  </PropertyGroup>
 
 </Project>

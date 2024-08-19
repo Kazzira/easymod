@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
 using System.IO.Abstractions;
-using System.Linq;
 using System.Reactive.Subjects;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Focus.Analysis.Execution;
 using Focus.Analysis.Plugins;
 using Focus.Analysis.Records;

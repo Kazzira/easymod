@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Abstractions;
+﻿using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Focus.Files;
 using Moq;
 using Xunit;
@@ -36,7 +30,7 @@ public class ComponentPerDirectoryModRepositoryTests
 
     class TestRepository : ComponentPerDirectoryModRepository<ComponentPerDirectoryConfiguration>
     {
-        public Mock<IWatchable> WatchableIndexMock { get; private set; }
+        public Mock<IWatchable> WatchableIndexMock { get; private set; } = new();
 
         public TestRepository(IFileSystem fs, IIndexedModRepository inner)
             : base(fs, inner) { }

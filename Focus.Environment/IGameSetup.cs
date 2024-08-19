@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Focus.Environment;
+﻿namespace Focus.Environment;
 
 public interface IGameSetup
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Focus.ModManagers;
+﻿namespace Focus.ModManagers;
 
 public class ModInfo : IModLocatorKey
 {

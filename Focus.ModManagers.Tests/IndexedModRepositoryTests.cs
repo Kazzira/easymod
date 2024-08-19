@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Focus.Testing.Files;
 using Moq;
 using Xunit;
@@ -16,7 +12,7 @@ public class IndexedModRepositoryTests : IAsyncLifetime
     private readonly List<KeyedComponent> componentManifest = new();
     private readonly Mock<IComponentResolver> componentResolverMock;
     private readonly FakeBucketedFileIndex modIndex;
-    private readonly Dictionary<string, string> modNames;
+    private readonly Dictionary<string, string> modNames = [];
     private readonly IndexedModRepository modRepository;
 
     public IndexedModRepositoryTests()
@@ -99,7 +95,7 @@ public class IndexedModRepositoryTests : IAsyncLifetime
     [InlineData("quux_disabled", "modname2")]
     [InlineData("standalone", "standalone")]
     [InlineData("unknown", null)]
-    public void CanFindModByComponentName(string componentName, string expectedModName)
+    public void CanFindModByComponentName(string componentName, string? expectedModName)
     {
         var mod = modRepository.FindByComponentName(componentName);
         Assert.Equal(expectedModName, mod?.Name);
@@ -112,7 +108,7 @@ public class IndexedModRepositoryTests : IAsyncLifetime
     [InlineData("02_quux_disabled", "modname2")]
     [InlineData("standalone", "standalone")]
     [InlineData("unknown", null)]
-    public void CanFindModByComponentPath(string pathInRoot, string expectedModName)
+    public void CanFindModByComponentPath(string pathInRoot, string? expectedModName)
     {
         var mod = modRepository.FindByComponentPath($@"{RootPath}\{pathInRoot}");
         Assert.Equal(expectedModName, mod?.Name);
@@ -232,7 +228,7 @@ public class IndexedModRepositoryTests : IAsyncLifetime
     [InlineData("02", "modname2")]
     [InlineData("", null)]
     [InlineData("99", null)]
-    public void GetById_FindsModWithId(string modId, string expectedModName)
+    public void GetById_FindsModWithId(string modId, string? expectedModName)
     {
         var mod = modRepository.GetById(modId);
         Assert.Equal(expectedModName, mod?.Name);
@@ -246,7 +242,7 @@ public class IndexedModRepositoryTests : IAsyncLifetime
     [InlineData("standalone", "")]
     [InlineData("", null)]
     [InlineData("invalid", null)]
-    public void GetByName_FindsModOrComponentWithName(string modName, string expectedModId)
+    public void GetByName_FindsModOrComponentWithName(string modName, string? expectedModId)
     {
         var mod = modRepository.GetByName(modName);
         Assert.Equal(expectedModId, mod?.Id);
@@ -357,6 +353,7 @@ public class IndexedModRepositoryTests : IAsyncLifetime
         modIndex.AddFiles("01_foo", "foo.bsa");
 
         var mod = modRepository.GetById("01");
+        Assert.NotNull(mod);
         // Useful to make sure these DON'T get indexed as _loose_ files.
         Assert.False(modRepository.ContainsFile(mod, "new1", false, false));
         Assert.False(modRepository.ContainsFile(mod, "new2", false, false));
@@ -385,6 +382,7 @@ public class IndexedModRepositoryTests : IAsyncLifetime
         var mod = modRepository.GetById("01");
         modIndex.RemoveFiles("01_bar", "bar.bsa");
 
+        Assert.NotNull(mod);
         Assert.Collection(
             modRepository.SearchForFiles("common/c1", true, false),
             x => AssertSearchResult(x, "modname1", "foo"),
@@ -400,6 +398,7 @@ public class IndexedModRepositoryTests : IAsyncLifetime
         var mod = modRepository.GetById("02");
         modIndex.AddFiles("02_baz", "new1");
 
+        Assert.NotNull(mod);
         Assert.True(modRepository.ContainsFile(mod, "new1", false, false));
         Assert.Collection(
             modRepository.SearchForFiles("new1", false, false),
@@ -471,6 +470,7 @@ public class IndexedModRepositoryTests : IAsyncLifetime
         var mod = modRepository.GetById("01");
         modIndex.RemoveFiles("01_foo", "common/c1", "foo1");
 
+        Assert.NotNull(mod);
         Assert.False(modRepository.ContainsFile(mod, "common/c1", false, false));
         Assert.False(modRepository.ContainsFile(mod, "foo1", false, false));
         Assert.Collection(
@@ -503,6 +503,7 @@ public class IndexedModRepositoryTests : IAsyncLifetime
     )
     {
         var mod = modRepository.GetByName(modName);
+        Assert.NotNull(mod);
         Assert.True(
             modRepository.ContainsFile(mod, relativePath, includeArchives, includeDisabled)
         );
@@ -521,6 +522,7 @@ public class IndexedModRepositoryTests : IAsyncLifetime
     )
     {
         var mod = modRepository.GetByName(modName);
+        Assert.NotNull(mod);
         Assert.False(
             modRepository.ContainsFile(mod, relativePath, includeArchives, includeDisabled)
         );
@@ -530,7 +532,7 @@ public class IndexedModRepositoryTests : IAsyncLifetime
         ModSearchResult result,
         string modName,
         string componentName,
-        string archiveName = null
+        string? archiveName = null
     )
     {
         Assert.Equal(modName, result.ModKey.Name);
@@ -543,6 +545,7 @@ public class IndexedModRepositoryTests : IAsyncLifetime
         foreach (var componentName in componentNames)
         {
             var mod = modRepository.FindByComponentName(componentName);
+            Assert.NotNull(mod);
             var component = mod.Components.Where(x => x.Name == componentName).FirstOrDefault();
             if (component is not null)
                 yield return component;

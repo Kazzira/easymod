@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Focus.Apps.EasyNpc.Configuration;
+﻿namespace Focus.Apps.EasyNpc.Configuration;
 
 public interface ISettingsContainer
 {

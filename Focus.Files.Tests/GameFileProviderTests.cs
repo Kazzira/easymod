@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO.Abstractions.TestingHelpers;
+﻿using System.IO.Abstractions.TestingHelpers;
 using Focus.Testing.Files;
 using Xunit;
 

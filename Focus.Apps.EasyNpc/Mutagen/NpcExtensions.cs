@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Focus.Providers.Mutagen;
+﻿using Focus.Providers.Mutagen;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Cache;

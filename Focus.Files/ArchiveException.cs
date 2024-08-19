@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-namespace Focus.Files;
+﻿namespace Focus.Files;
 
 public class ArchiveException : Exception
 {

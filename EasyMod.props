@@ -1,4 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Product>EasyMod</Product>
+    <Authors>focustense</Authors>
+    <Version>0.9.7</Version>
+  </PropertyGroup>
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -13,12 +18,5 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Serilog" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Focus.Core\Focus.Core.csproj" />
-    <ProjectReference Include="..\Focus.Environment\Focus.Environment.csproj" />
-  </ItemGroup>
-
 </Project>

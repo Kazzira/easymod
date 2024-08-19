@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Focus.Abstractions.Windows;
+﻿namespace Focus.Abstractions.Windows;
 
 public interface IEnvironmentStatics
 {

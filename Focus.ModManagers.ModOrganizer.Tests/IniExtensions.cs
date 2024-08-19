@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IniParser.Model;
+﻿using IniParser.Model;
 
 namespace Focus.ModManagers.ModOrganizer.Tests;
 

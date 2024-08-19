@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Focus;
+﻿namespace Focus;
 
 public interface IGameSettings
 {

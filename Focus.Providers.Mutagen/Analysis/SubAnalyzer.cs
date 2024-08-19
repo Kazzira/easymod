@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Loqui;
+﻿using Loqui;
 using Mutagen.Bethesda.Skyrim;
 
 namespace Focus.Analysis.Records;

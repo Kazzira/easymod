@@ -1,5 +1,4 @@
-﻿using System;
-using Autofac;
+﻿using Autofac;
 using Focus.Analysis.Execution;
 using Focus.Apps.EasyNpc.Profiles;
 

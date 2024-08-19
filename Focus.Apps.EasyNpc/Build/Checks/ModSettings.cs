@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO.Abstractions;
+﻿using System.IO.Abstractions;
 using Focus.Apps.EasyNpc.Configuration;
 using Focus.Apps.EasyNpc.Profiles;
 

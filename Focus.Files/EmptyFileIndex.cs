@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Focus.Files;
+﻿namespace Focus.Files;
 
 public class EmptyFileIndex : INotifyingBucketedFileIndex, INotifyingFileIndex
 {

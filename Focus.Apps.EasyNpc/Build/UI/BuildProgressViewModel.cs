@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
 using Focus.Apps.EasyNpc.Build.Pipeline;
 using PropertyChanged;
 

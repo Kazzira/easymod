@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Focus.ModManagers.ModOrganizer;
+﻿namespace Focus.ModManagers.ModOrganizer;
 
 class Mod
 {

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Linq;
-using Focus.Apps.EasyNpc.Profiles;
+﻿using Focus.Apps.EasyNpc.Profiles;
 using Focus.Apps.EasyNpc.Resources;
 using Focus.Environment;
 

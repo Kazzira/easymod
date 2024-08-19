@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Focus.Providers.Mutagen.Analysis;
+﻿using Focus.Providers.Mutagen.Analysis;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Skyrim;

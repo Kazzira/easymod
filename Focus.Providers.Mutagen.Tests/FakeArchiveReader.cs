@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Mutagen.Bethesda.Archives;
 using Noggog;
@@ -29,7 +25,7 @@ class FakeArchiveReader : IArchiveReader
 
     public FakeArchiveReader Put(string path, byte[] data)
     {
-        var directoryName = Path.GetDirectoryName(path);
+        var directoryName = Path.GetDirectoryName(path) ?? "";
         if (!folders.TryGetValue(directoryName, out var folder))
         {
             folder = new Folder(directoryName);

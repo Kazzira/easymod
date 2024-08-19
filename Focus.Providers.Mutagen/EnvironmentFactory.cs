@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Focus.Environment;
+﻿using Focus.Environment;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Environments;
 using Mutagen.Bethesda.Plugins;

@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Skyrim;
 using Noggog;
@@ -38,7 +36,7 @@ class FakeReadOnlyCache : IReadOnlyCache<ISkyrimMajorRecordGetter, FormKey>
             yield return new KeyValue<FormKey, ISkyrimMajorRecordGetter>(kvp.Key, kvp.Value);
     }
 
-    public ISkyrimMajorRecordGetter TryGetValue(FormKey key)
+    public ISkyrimMajorRecordGetter? TryGetValue(FormKey key)
     {
         return records.TryGetValue(key, out var rec) ? rec : null;
     }
@@ -76,7 +74,7 @@ class FakeReadOnlyCache : IReadOnlyCache<ISkyrimMajorRecordGetter, FormKey>
                 .GetEnumerator();
         }
 
-        public T TryGetValue(FormKey key)
+        public T? TryGetValue(FormKey key)
         {
             return inner.TryGetValue(key) as T;
         }

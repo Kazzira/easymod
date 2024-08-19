@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Focus.Analysis.Records;
+﻿namespace Focus.Analysis.Records;
 
 public class NpcAnalysis : RecordAnalysis
 {

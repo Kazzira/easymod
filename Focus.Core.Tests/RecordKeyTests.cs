@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 
 namespace Focus.Core.Tests;
@@ -73,7 +72,7 @@ public class RecordKeyTests
         [Fact]
         public void WhenValueIsNull_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => RecordKey.Parse(null));
+            Assert.Throws<ArgumentNullException>(() => RecordKey.Parse(null!));
         }
 
         [Fact]

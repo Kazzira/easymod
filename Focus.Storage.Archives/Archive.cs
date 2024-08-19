@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Focus.Storage.Archives;
+﻿namespace Focus.Storage.Archives;
 
 public class Archive : IDisposable
 {

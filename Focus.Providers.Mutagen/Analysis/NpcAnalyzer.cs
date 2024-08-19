@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Linq;
 using Focus.Analysis.Records;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;

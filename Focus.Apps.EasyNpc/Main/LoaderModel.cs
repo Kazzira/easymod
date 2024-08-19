@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Threading.Tasks;
+﻿using System.Reactive.Linq;
 using Focus.Analysis.Execution;
 using Focus.Apps.EasyNpc.Configuration;
 using Focus.Apps.EasyNpc.Profiles;
@@ -45,7 +41,7 @@ public class LoaderModel
     {
         this.analysisReceivers = analysisReceivers;
         this.analyzer = analyzer;
-        this.log = logger;
+        log = logger;
         this.modRepository = modRepository;
         this.modSettings = modSettings;
         this.profileFactory = profileFactory;

@@ -1,4 +1,3 @@
-using System;
 using Focus.Testing.Files;
 using Xunit;
 

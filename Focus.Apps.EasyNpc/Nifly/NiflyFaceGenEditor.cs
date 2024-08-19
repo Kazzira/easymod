@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
 using System.IO.Abstractions;
-using System.Linq;
-using System.Threading.Tasks;
 using Focus.Apps.EasyNpc.Build;
 using Focus.Files;
 using nifly;

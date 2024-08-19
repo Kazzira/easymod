@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace Focus.Storage.Archives;
 
@@ -39,7 +34,7 @@ public class ArchiveBuilder
     public ArchiveBuilder AddDirectory(
         string directoryName,
         string pathInArchive,
-        string searchPattern = null
+        string? searchPattern = null
     )
     {
         var entries = Directory
@@ -164,7 +159,7 @@ public class ArchiveBuilder
     private static string GetOverflowFileName(string outputFileName, int overflowIndex)
     {
         var extension = Path.GetExtension(outputFileName);
-        var directoryName = Path.GetDirectoryName(outputFileName);
+        var directoryName = Path.GetDirectoryName(outputFileName) ?? "";
         var fileName = Path.GetFileNameWithoutExtension(outputFileName);
         var pathWithoutExtension = Path.Combine(directoryName, fileName);
         return $"{pathWithoutExtension}{overflowIndex}{extension}";
@@ -220,8 +215,8 @@ public class ArchiveBuilder
 
     public class FileEntry
     {
-        public string LocalFilePath { get; init; }
-        public string PathInArchive { get; init; }
+        public required string LocalFilePath { get; init; }
+        public required string PathInArchive { get; init; }
         public long Size { get; init; }
     }
 
@@ -230,7 +225,7 @@ public class ArchiveBuilder
         public int Count => entries.Count;
         public IEnumerable<FileEntry> Entries => entries;
         public int EstimatedCompressedSize { get; private set; }
-        public string FileName { get; init; }
+        public required string FileName { get; init; }
         public long Size { get; private set; }
 
         private readonly List<FileEntry> entries = new();

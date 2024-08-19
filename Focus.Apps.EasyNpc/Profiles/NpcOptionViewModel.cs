@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Focus.Analysis.Records;
 
 namespace Focus.Apps.EasyNpc.Profiles;

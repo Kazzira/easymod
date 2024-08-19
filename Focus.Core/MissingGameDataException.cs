@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-namespace Focus;
+﻿namespace Focus;
 
 public class MissingGameDataException : Exception
 {

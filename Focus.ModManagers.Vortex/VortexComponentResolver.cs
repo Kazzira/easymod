@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-
-namespace Focus.ModManagers.Vortex;
+﻿namespace Focus.ModManagers.Vortex;
 
 public class VortexComponentResolver : IComponentResolver
 {

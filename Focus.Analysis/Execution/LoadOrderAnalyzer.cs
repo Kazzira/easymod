@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Focus.Analysis.Records;
+﻿using Focus.Analysis.Records;
 using Focus.Environment;
 using Serilog;
 

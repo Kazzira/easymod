@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using IniParser;
+﻿using IniParser;
 using IniParser.Model;
 
 namespace Focus.ModManagers.ModOrganizer;

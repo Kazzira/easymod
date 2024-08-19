@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Focus.Apps.EasyNpc.Mutagen;
+﻿using Focus.Apps.EasyNpc.Mutagen;
 using Focus.Providers.Mutagen;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;

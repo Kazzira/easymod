@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using SharpDX.Multimedia;
+﻿using SharpDX.Multimedia;
 using SharpDX.XAudio2;
 
 namespace Focus.Audio;
@@ -20,7 +16,7 @@ public class Player : IDisposable
     private readonly MasteringVoice master;
 
     private bool disposed = false;
-    private CancellationTokenSource playbackCancellationTokenSource;
+    private CancellationTokenSource? playbackCancellationTokenSource;
 
     public Player()
     {

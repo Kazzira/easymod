@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Focus.Apps.EasyNpc.Configuration;
+﻿namespace Focus.Apps.EasyNpc.Configuration;
 
 public interface IAppSettings
 {

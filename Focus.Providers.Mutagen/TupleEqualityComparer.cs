@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Focus.Providers.Mutagen;
+﻿namespace Focus.Providers.Mutagen;
 
 class TupleEqualityComparer<T1, T2> : IEqualityComparer<Tuple<T1, T2>>
 {

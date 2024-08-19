@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using Focus.Apps.EasyNpc.Build.Pipeline;
 
 namespace Focus.Apps.EasyNpc.Build.UI;

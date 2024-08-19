@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Focus.Apps.EasyNpc.Main;
+﻿namespace Focus.Apps.EasyNpc.Main;
 
 public class StartupWarningViewModel
 {

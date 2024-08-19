@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Focus.Files;
+﻿using Focus.Files;
 
 namespace Focus.Testing.Files;
 
 public class FakeBucketedFileIndex : INotifyingBucketedFileIndex
 {
-    public event EventHandler<BucketedFileEventArgs> AddedToBucket;
-    public event EventHandler<BucketedFileEventArgs> RemovedFromBucket;
+    public event EventHandler<BucketedFileEventArgs>? AddedToBucket;
+    public event EventHandler<BucketedFileEventArgs>? RemovedFromBucket;
 
     private readonly Dictionary<string, HashSet<string>> buckets = new();
 

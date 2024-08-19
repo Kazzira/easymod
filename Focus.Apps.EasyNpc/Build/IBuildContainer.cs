@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Focus.Apps.EasyNpc.Build;
+﻿namespace Focus.Apps.EasyNpc.Build;
 
 public interface IBuildContainer
 {

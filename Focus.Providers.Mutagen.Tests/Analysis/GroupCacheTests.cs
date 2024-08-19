@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Castle.DynamicProxy;
+﻿using Castle.DynamicProxy;
 using Focus.Providers.Mutagen.Analysis;
 using Moq;
 using Mutagen.Bethesda.Plugins;
@@ -127,6 +124,7 @@ public class GroupCacheTests
         shouts.Add(new Shout(mod, "Shout3"));
         var group = groups.Get("mod.esp", RecordType.Shout);
 
+        Assert.NotNull(group);
         Assert.Collection(
             group,
             g => Assert.Equal("Shout1", g.Value.EditorID),
@@ -145,8 +143,8 @@ public class GroupCacheTests
         var group2 = groups.Get("mod.esp", RecordType.Shout);
         var group3 = groups.Get("mod.esp", RecordType.Shout);
 
-        Assert.Equal(group2.Keys, group1.Keys);
-        Assert.Equal(group3.Keys, group1.Keys);
+        Assert.Equal(group2?.Keys, group1?.Keys);
+        Assert.Equal(group3?.Keys, group1?.Keys);
         Assert.Single(modCalls.Property(x => x.Shouts));
     }
 
@@ -166,6 +164,7 @@ public class GroupCacheTests
         shouts.Add(new Shout(mod, "Shout3"));
         var group = groups.Get("mod.esp", x => x.Shouts);
 
+        Assert.NotNull(group);
         Assert.Collection(
             group,
             g => Assert.Equal("Shout1", g.EditorID),
@@ -184,8 +183,8 @@ public class GroupCacheTests
         var group2 = groups.Get("mod.esp", x => x.Shouts);
         var group3 = groups.Get("mod.esp", x => x.Shouts);
 
-        Assert.Equal(group2.ToList(), group1.ToList());
-        Assert.Equal(group3.ToList(), group1.ToList());
+        Assert.Equal(group2?.ToList(), group1?.ToList());
+        Assert.Equal(group3?.ToList(), group1?.ToList());
         Assert.Single(modCalls.Property(x => x.Shouts));
     }
 
@@ -225,6 +224,7 @@ public class GroupCacheTests
         );
 
         var winner = groups.GetWinner(FormKey.Factory("000001:mod1.esp").ToLink<Shout>());
+        Assert.NotNull(winner);
         Assert.Equal("Mod3Record", winner.EditorID);
     }
 
@@ -248,6 +248,7 @@ public class GroupCacheTests
         );
 
         var winner = groups.GetWinnerWithSource(FormKey.Factory("000001:mod1.esp").ToLink<Shout>());
+        Assert.NotNull(winner);
         Assert.Equal("mod3.esp", winner.Key);
         Assert.Equal("Mod3Record", winner.Value.EditorID);
     }
@@ -285,7 +286,7 @@ public class GroupCacheTests
         Assert.True(groups.MasterExists(FormKey.Factory("000002:mod.esp"), RecordType.Shout));
     }
 
-    private ISkyrimMod AddLoadedMod(string fileName, InvocationTracker<ISkyrimMod> tracker = null)
+    private ISkyrimMod AddLoadedMod(string fileName, InvocationTracker<ISkyrimMod>? tracker = null)
     {
         var mod = new SkyrimMod(fileName, release);
         var interceptors = new List<IInterceptor>();

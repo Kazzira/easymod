@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Focus.Analysis.Records;
+﻿using Focus.Analysis.Records;
 
 namespace Focus.Analysis.Plugins;
 

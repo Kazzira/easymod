@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Focus.Apps.EasyNpc.Configuration;
+﻿using Focus.Apps.EasyNpc.Configuration;
 using Focus.Providers.Mutagen;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;

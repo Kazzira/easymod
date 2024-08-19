@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Focus.Files;
+﻿namespace Focus.Files;
 
 public class ArchiveFileProvider : IFileProvider
 {

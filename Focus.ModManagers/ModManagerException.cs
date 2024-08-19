@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-namespace Focus.ModManagers;
+﻿namespace Focus.ModManagers;
 
 public class ModManagerException : Exception
 {

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Focus.Apps.EasyNpc.GameData.Files;
+﻿using Focus.Apps.EasyNpc.GameData.Files;
 using Focus.Providers.Mutagen;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Skyrim;

@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-
-namespace Focus.ModManagers;
+﻿namespace Focus.ModManagers;
 
 public class ModPerComponentResolver : IComponentResolver
 {

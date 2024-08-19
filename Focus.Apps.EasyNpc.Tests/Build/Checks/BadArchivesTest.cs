@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Focus.Analysis.Plugins;
+﻿using Focus.Analysis.Plugins;
 using Focus.Analysis.Records;
 using Focus.Apps.EasyNpc.Build;
 using Focus.Apps.EasyNpc.Build.Checks;

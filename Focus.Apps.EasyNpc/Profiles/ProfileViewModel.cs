@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
 using Focus.Apps.EasyNpc.GameData.Files;
@@ -41,7 +38,7 @@ public class ProfileViewModel
     {
         this.lineupBuilder = lineupBuilder;
         this.messageBus = messageBus;
-        this.npcs = profile.Npcs.ToDictionary(x => new RecordKey(x), RecordKeyComparer.Default);
+        npcs = profile.Npcs.ToDictionary(x => new RecordKey(x), RecordKeyComparer.Default);
         this.profile = profile;
 
         pluginOrder = gameSettings

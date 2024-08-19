@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO.Abstractions;
+﻿using System.IO.Abstractions;
 using Focus.Abstractions.Windows;
 using Microsoft.Win32;
 

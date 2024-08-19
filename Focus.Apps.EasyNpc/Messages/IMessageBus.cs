@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Focus.Apps.EasyNpc.Messages;
+﻿namespace Focus.Apps.EasyNpc.Messages;
 
 public interface IMessageBus
 {

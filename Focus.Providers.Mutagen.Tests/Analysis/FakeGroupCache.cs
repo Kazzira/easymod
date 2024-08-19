@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections;
 using Focus.Providers.Mutagen.Analysis;
 using Loqui;
 using Moq;
@@ -50,7 +47,7 @@ class FakeGroupCache : IGroupCache
             var nextId = nextIds.TryGetValue(pluginName, out var id) ? id : 0;
             var formKey = new FormKey(masterName, ++nextId);
             nextIds[pluginName] = nextId;
-            var record = (T)Activator.CreateInstance(typeof(T), formKey, SkyrimRelease.SkyrimSE);
+            var record = (T)Activator.CreateInstance(typeof(T), formKey, SkyrimRelease.SkyrimSE)!;
             configure(record);
             group.Put(record);
             newKeys.Add(formKey);
@@ -107,18 +104,18 @@ class FakeGroupCache : IGroupCache
         }
     }
 
-    public ISkyrimModGetter GetMod(string pluginName)
+    public ISkyrimModGetter? GetMod(string pluginName)
     {
         return mods.TryGetValue(pluginName, out var modMock) ? modMock.Object : default;
     }
 
-    public T GetWinner<T>(IFormLinkGetter<T> link)
+    public T? GetWinner<T>(IFormLinkGetter<T> link)
         where T : class, ISkyrimMajorRecordGetter
     {
         return GetAll(link).FirstOrDefault()?.Value;
     }
 
-    public IKeyValue<string, T> GetWinnerWithSource<T>(IFormLinkGetter<T> link)
+    public IKeyValue<string, T>? GetWinnerWithSource<T>(IFormLinkGetter<T> link)
         where T : class, ISkyrimMajorRecordGetter
     {
         return GetAll(link).FirstOrDefault();
@@ -216,8 +213,8 @@ class FakeGroupCache : IGroupCache
 
         public IEnumerable<IAssetLinkGetter> EnumerateAssetLinks(
             AssetLinkQuery queryCategories,
-            IAssetLinkCache linkCache = null,
-            Type assetType = null
+            IAssetLinkCache? linkCache = null,
+            Type? assetType = null
         )
         {
             throw new NotImplementedException();

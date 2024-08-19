@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Focus.Analysis.Records;
+﻿using Focus.Analysis.Records;
 
 namespace Focus.Apps.EasyNpc.Build;
 

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Focus.Environment;
+﻿namespace Focus.Environment;
 
 public interface IReadOnlyLoadOrderGraph
 {

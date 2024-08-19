@@ -16,7 +16,7 @@ public class ModOrganizerModRepository
         : base(fs, inner)
     {
         this.fs = fs;
-        this.modOrganizerConfig = config;
+        modOrganizerConfig = config;
     }
 
     protected override IComponentResolver GetComponentResolver(

@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using MessagePack;
+﻿using MessagePack;
 
 namespace Focus.ModManagers.Vortex;
 

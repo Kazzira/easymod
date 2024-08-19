@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Focus;
+﻿namespace Focus;
 
 public static class DictionaryExtensions
 {

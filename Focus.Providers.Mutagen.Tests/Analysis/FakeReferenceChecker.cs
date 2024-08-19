@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Focus.Analysis.Records;
+﻿using Focus.Analysis.Records;
 using Focus.Providers.Mutagen.Analysis;
 using Mutagen.Bethesda.Skyrim;
 
@@ -8,7 +6,7 @@ namespace Focus.Providers.Mutagen.Tests.Analysis;
 
 class FakeReferenceChecker : IReferenceChecker
 {
-    public IEnumerable<ReferencePath> InvalidPaths { get; set; }
+    public IEnumerable<ReferencePath> InvalidPaths { get; set; } = [];
 
     public IReferenceChecker<T> Of<T>()
         where T : class, ISkyrimMajorRecordGetter

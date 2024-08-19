@@ -1,5 +1,4 @@
-﻿using System;
-using Mutagen.Bethesda;
+﻿using Mutagen.Bethesda;
 
 namespace Focus.Providers.Mutagen;
 

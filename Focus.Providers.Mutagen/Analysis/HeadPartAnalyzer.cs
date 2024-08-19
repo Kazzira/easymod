@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Focus.Analysis.Records;
+﻿using Focus.Analysis.Records;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Skyrim;
 

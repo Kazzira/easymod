@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace Focus.Apps.EasyNpc.Build.Pipeline;
+﻿namespace Focus.Apps.EasyNpc.Build.Pipeline;
 
 public class ReportTask : BuildTask<BuildReport>
 {

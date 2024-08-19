@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace Focus;
+﻿namespace Focus;
 
 public static class TaskExtensions
 {

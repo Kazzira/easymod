@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Subjects;
+﻿using System.Reactive.Subjects;
 using Focus.Analysis.Plugins;
 using Focus.Analysis.Records;
 using Focus.Apps.EasyNpc.GameData.Files;

@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using Focus.Files;
 using Moq;
 using Mutagen.Bethesda;

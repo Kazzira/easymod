@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Serilog.Core;
+﻿using Serilog.Core;
 using Serilog.Events;
 
 namespace Focus.Apps.EasyNpc.Debug;

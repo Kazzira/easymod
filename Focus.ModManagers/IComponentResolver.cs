@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Focus.ModManagers;
+﻿namespace Focus.ModManagers;
 
 public interface IComponentResolver
 {

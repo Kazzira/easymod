@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 using Focus.Files;
 
 namespace Focus.Apps.EasyNpc.Build.Pipeline;

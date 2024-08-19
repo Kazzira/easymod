@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.IO.Abstractions;
-using System.Linq;
 
 namespace Focus.Testing.Files;
 
 public class FakeFileSystemWatcher : IFileSystemWatcher
 {
-    public IContainer Container => null;
+    public IContainer? Container => null;
     public bool EnableRaisingEvents { get; set; }
     public IFileSystem FileSystem => throw new NotImplementedException();
     public string Filter
     {
-        get => Filters.FirstOrDefault();
+        get => Filters.FirstOrDefault() ?? "";
         set
         {
             Filters.Clear();
@@ -26,15 +23,15 @@ public class FakeFileSystemWatcher : IFileSystemWatcher
     public int InternalBufferSize { get; set; }
     public bool IsDisposed { get; private set; }
     public NotifyFilters NotifyFilter { get; set; }
-    public string Path { get; set; }
-    public ISite Site { get; set; }
-    public ISynchronizeInvoke SynchronizingObject { get; set; }
+    public string Path { get; set; } = "";
+    public ISite? Site { get; set; }
+    public ISynchronizeInvoke? SynchronizingObject { get; set; }
 
-    public event FileSystemEventHandler Changed;
-    public event FileSystemEventHandler Created;
-    public event FileSystemEventHandler Deleted;
-    public event ErrorEventHandler Error;
-    public event RenamedEventHandler Renamed;
+    public event FileSystemEventHandler? Changed;
+    public event FileSystemEventHandler? Created;
+    public event FileSystemEventHandler? Deleted;
+    public event ErrorEventHandler? Error;
+    public event RenamedEventHandler? Renamed;
 
     public void BeginInit() { }
 

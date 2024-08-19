@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Focus.ModManagers;
+﻿namespace Focus.ModManagers;
 
 public interface IModRepository : IEnumerable<ModInfo>
 {

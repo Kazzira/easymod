@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Focus;
+﻿namespace Focus;
 
 public class ReadOnlyGameSettings : IGameSettings
 {

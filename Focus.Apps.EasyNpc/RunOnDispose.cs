@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Focus.Apps.EasyNpc;
+﻿namespace Focus.Apps.EasyNpc;
 
 public class RunOnDispose : IDisposable
 {

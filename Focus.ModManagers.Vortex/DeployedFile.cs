@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using MessagePack;
+﻿using MessagePack;
 
 namespace Focus.ModManagers.Vortex;
 
