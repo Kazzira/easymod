@@ -1,6 +1,6 @@
 ﻿using System.IO.Abstractions;
 using Focus.Environment;
-using Mutagen.Bethesda.Skyrim;
+using Mutagen.Bethesda.Plugins.Records;
 using Serilog;
 
 namespace Focus.Providers.Mutagen;
@@ -41,10 +41,9 @@ public class GameSetup : IGameSetup
         var listings = setupStatics
             .GetLoadOrderListings(game.GameRelease, DataDirectory, true)
             .ToList();
-        var masterTasks = listings
+        var masterResults = listings
             .Select(x => TryGetMasterNames(DataDirectory, x.ModKey.FileName))
             .ToArray();
-        var masterResults = Task.WhenAll(masterTasks).Result;
         AvailablePlugins = listings
             .Zip(masterResults)
             .Select(
@@ -66,7 +65,7 @@ public class GameSetup : IGameSetup
         LoadOrderGraph = new LoadOrderGraph(AvailablePlugins, blacklistedPluginNames);
     }
 
-    private async Task<(bool, IEnumerable<string>)> TryGetMasterNames(
+    private (bool, IEnumerable<string>) TryGetMasterNames(
         string dataDirectory,
         string pluginFileName
     )
@@ -74,13 +73,8 @@ public class GameSetup : IGameSetup
         var path = fs.Path.Combine(dataDirectory, pluginFileName);
         try
         {
-            var data = await fs.File.ReadAllBytesAsync(path).ConfigureAwait(false);
-            using var mod = SkyrimMod.CreateFromBinaryOverlay(
-                new MemoryStream(data),
-                game.GameRelease.ToSkyrimRelease(),
-                pluginFileName
-            );
-            var masterNames = mod.ModHeader.MasterReferences.Select(x => x.Master.FileName.String);
+            using var mod = ModInstantiator.ImportGetter(path, game.GameRelease);
+            var masterNames = mod.MasterReferences.Select(x => x.Master.FileName.String);
             return (true, masterNames);
         }
         catch (Exception ex)
