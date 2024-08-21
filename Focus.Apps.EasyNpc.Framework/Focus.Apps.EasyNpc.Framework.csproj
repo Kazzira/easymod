@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\EasyMod.props" />
+
+  <PropertyGroup>
+    <AssemblyTitle>UI-independent logic for EasyNPC such as app data and patch logic.</AssemblyTitle>
+    <RootNamespace>Focus.Apps.EasyNpc</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FastEnum" />
+    <PackageReference Include="Newtonsoft.Json" />
+  </ItemGroup>
+
+</Project>
