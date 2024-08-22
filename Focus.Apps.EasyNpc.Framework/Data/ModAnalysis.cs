@@ -29,14 +29,3 @@ public class ModAnalysis
     /// </summary>
     public Dictionary<string, NpcAnalysis> Npcs { get; set; } = [];
 }
-
-/// <summary>
-/// The results of analyzing a single NPC, as defined within a single mod/component.
-/// </summary>
-public class NpcAnalysis
-{
-    /// <summary>
-    /// Features applicable to the analyzed mod's definition of the NPC.
-    /// </summary>
-    public NpcFeatures Features { get; set; }
-}

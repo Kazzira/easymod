@@ -1,4 +1,6 @@
-﻿namespace Focus.Apps.EasyNpc.Data;
+﻿using Newtonsoft.Json;
+
+namespace Focus.Apps.EasyNpc.Data;
 
 /// <summary>
 /// Describes a group that an <see cref="NpcProperty"/> can be assigned to.

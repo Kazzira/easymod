@@ -43,7 +43,7 @@ public class ProfileData
     /// Configures which NPC properties (<see cref="NpcProperty"/>) will be merged together, and the
     /// merging and priority settings for each group.
     /// </summary>
-    public Dictionary<string, NpcPropertyGroup> PropertyGroups { get; set; } = [];
+    public List<NpcPropertyGroup> PropertyGroups { get; set; } = [];
 
     /// <summary>
     /// Configurations for individual NPCs, by their form key (e.g. "Skyrim.esm:123abc").
