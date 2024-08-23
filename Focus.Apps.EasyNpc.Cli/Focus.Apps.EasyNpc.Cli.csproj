@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\EasyMod.props" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>enpc</AssemblyName>
+    <AssemblyTitle>Command-line interface for EasyNPC.</AssemblyTitle>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console.Cli" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Focus.Apps.EasyNpc.Framework\Focus.Apps.EasyNpc.Framework.csproj" />
+  </ItemGroup>
+
+</Project>

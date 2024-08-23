@@ -1,10 +1,12 @@
 ﻿using FastEnumUtility;
+using VYaml.Annotations;
 
 namespace Focus.Apps.EasyNpc.Data;
 
 /// <summary>
 /// Games that are (possibly) supported by the tool.
 /// </summary>
+[YamlObject(NamingConvention.UpperCamelCase)]
 public enum GameName
 {
     [Label("Oblivion")]

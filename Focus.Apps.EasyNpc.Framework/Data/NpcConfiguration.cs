@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using VYaml.Annotations;
 
 namespace Focus.Apps.EasyNpc.Data;
 
@@ -11,18 +12,21 @@ public class NpcConfiguration
     /// Specifies where to obtain the face geometry file (facegen NIF).
     /// </summary>
     [JsonProperty("facegeom")]
+    [YamlMember("facegeom")]
     public NpcAssetSource FaceGeometrySource { get; set; } = new();
 
     /// <summary>
     /// Specifies where to obtain the face tint (texture).
     /// </summary>
     [JsonProperty("facetint")]
+    [YamlMember("facetint")]
     public NpcAssetSource FaceTintSource { get; set; } = new();
 
     /// <summary>
-    /// Map of <see cref="NpcPropertyGroup.Name"/> values to the source plugin used for that group.
+    /// Map of <see cref="NpcPropertyGroup"/> keys to the source plugin used for that group.
     /// </summary>
     [JsonProperty("plugin")]
+    [YamlMember("plugin")]
     public Dictionary<string, NpcPluginSource> PluginSources { get; set; } = [];
 
     /// <summary>
@@ -40,6 +44,7 @@ public class NpcAssetSource
     /// <summary>
     /// The <see cref="ModComponent.Key"/> identifying the exact location of the source file.
     /// </summary>
+    [YamlMember("modComponent")]
     public string ModComponentKey { get; set; } = "";
 
     /// <summary>
@@ -62,6 +67,7 @@ public class NpcPluginSource
     /// <summary>
     /// The name of the plugin (<see cref="PluginManifest.Name"/>) where the data will come from.
     /// </summary>
+    [YamlMember("plugin")]
     public string PluginName { get; set; } = "";
 
     /// <summary>

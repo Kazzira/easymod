@@ -1,8 +1,11 @@
-﻿namespace Focus.Apps.EasyNpc.Data;
+﻿using VYaml.Annotations;
+
+namespace Focus.Apps.EasyNpc.Data;
 
 /// <summary>
 /// Actions that can be taken when an NPC is using a custom (mod-added) race.
 /// </summary>
+[YamlObject(NamingConvention.UpperCamelCase)]
 public enum CustomRaceBehavior
 {
     /// <summary>

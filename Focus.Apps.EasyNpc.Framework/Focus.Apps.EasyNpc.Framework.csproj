@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="FastEnum" />
     <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="VYaml" />
   </ItemGroup>
 
 </Project>

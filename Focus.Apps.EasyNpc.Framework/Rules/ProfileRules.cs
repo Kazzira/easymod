@@ -34,13 +34,12 @@ public class ProfileRules(ProfileData profile, AnalysisCacheData analysis)
                 .ToList(),
         };
         var previousConfig = profile.Npcs.GetValueOrDefault(recordKey);
-        foreach (var propertyGroup in profile.PropertyGroups)
+        foreach (var (groupName, propertyGroup) in profile.PropertyGroups)
         {
             var groupExplanation = new NpcPropertyGroupExplanation();
-            result.PropertyGroups.Add(propertyGroup.Name, groupExplanation);
+            result.PropertyGroups.Add(groupName, groupExplanation);
             if (
-                previousConfig?.PluginSources.TryGetValue(propertyGroup.Name, out var configSource)
-                    == true
+                previousConfig?.PluginSources.TryGetValue(groupName, out var configSource) == true
                 && configSource.Pinned
             )
             {

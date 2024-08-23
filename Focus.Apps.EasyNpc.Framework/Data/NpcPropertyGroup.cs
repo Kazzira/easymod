@@ -1,17 +1,14 @@
 ﻿using Newtonsoft.Json;
+using VYaml.Annotations;
 
 namespace Focus.Apps.EasyNpc.Data;
 
 /// <summary>
 /// Describes a group that an <see cref="NpcProperty"/> can be assigned to.
 /// </summary>
-public class NpcPropertyGroup
+[YamlObject]
+public partial class NpcPropertyGroup
 {
-    /// <summary>
-    /// Name of the group; must be unique.
-    /// </summary>
-    public string Name { get; set; } = "";
-
     /// <summary>
     /// Optional detailed description explaining the meaning or rationale for the group.
     /// </summary>

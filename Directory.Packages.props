@@ -12,6 +12,8 @@
     <PackageVersion Include="ModernWpfUI" Version="0.9.6" />
     <PackageVersion Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
     <PackageVersion Include="PropertyChanged.Fody" Version="4.1.0" />
+    <PackageVersion Include="Spectre.Console.Cli" Version="0.49.1" />
+    <PackageVersion Include="VYaml" Version="0.27.1" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="Fody" Version="6.8.1" />

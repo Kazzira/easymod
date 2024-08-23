@@ -1,10 +1,13 @@
-﻿namespace Focus.Apps.EasyNpc.Data;
+﻿using VYaml.Annotations;
+
+namespace Focus.Apps.EasyNpc.Data;
 
 /// <summary>
 /// Describes how a single mod is prioritized within a property group defined in
 /// <see cref="ProfileData.PropertyGroups"/>.
 /// </summary>
-public class ModPriority
+[YamlObject]
+public partial class ModPriority
 {
     /// <summary>
     /// Unique <see cref="ModManifest.Key"/> of the mod in this priority slot.

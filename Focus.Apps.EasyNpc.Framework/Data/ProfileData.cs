@@ -1,37 +1,44 @@
 ﻿using Newtonsoft.Json;
+using VYaml.Annotations;
 
 namespace Focus.Apps.EasyNpc.Data;
 
 /// <summary>
 /// Data format for a session profile.
 /// </summary>
-public class ProfileData
+[YamlObject]
+public partial class ProfileData
 {
     /// <summary>
     /// Unique name for this profile. Determined by the file name.
     /// </summary>
     [JsonIgnore]
+    [YamlIgnore]
     public string Name { get; set; } = "";
 
     /// <summary>
     /// The game that this profile targets.
     /// </summary>
+    [YamlMember("game")]
     public GameName GameName { get; set; } = GameName.SkyrimSE;
 
     /// <summary>
     /// Path to the game directory, if targeting a path different from the normal installation
     /// directory and/or the mod manager's target directory.
     /// </summary>
+    [YamlMember("path")]
     public string? GamePath { get; set; } = null;
 
     /// <summary>
     /// Default merging behaviors for mods that do not override them.
     /// </summary>
+    [YamlMember("behavior")]
     public MergeBehaviors DefaultBehaviors { get; set; } = new();
 
     /// <summary>
     /// Configures how the build output will be generated.
     /// </summary>
+    [YamlMember("output")]
     public OutputSettings OutputSettings { get; set; } = new();
 
     /// <summary>
@@ -43,7 +50,7 @@ public class ProfileData
     /// Configures which NPC properties (<see cref="NpcProperty"/>) will be merged together, and the
     /// merging and priority settings for each group.
     /// </summary>
-    public List<NpcPropertyGroup> PropertyGroups { get; set; } = [];
+    public Dictionary<string, NpcPropertyGroup> PropertyGroups { get; set; } = [];
 
     /// <summary>
     /// Configurations for individual NPCs, by their form key (e.g. "Skyrim.esm:123abc").
@@ -59,7 +66,8 @@ public class ProfileData
 /// <summary>
 /// Specifies the default merge behaviors for a profile, when not overridden in a particular mod.
 /// </summary>
-public class MergeBehaviors
+[YamlObject]
+public partial class MergeBehaviors
 {
     /// <summary>
     /// Merging behavior for NPC default outfits with custom armor pieces.
@@ -85,7 +93,8 @@ public class MergeBehaviors
 /// <summary>
 /// Profile-specific build output settings.
 /// </summary>
-public class OutputSettings
+[YamlObject]
+public partial class OutputSettings
 {
     /// <summary>
     /// Format string for the output directory (generated mod name).

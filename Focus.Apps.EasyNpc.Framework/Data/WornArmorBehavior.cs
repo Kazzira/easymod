@@ -1,9 +1,12 @@
-﻿namespace Focus.Apps.EasyNpc.Data;
+﻿using VYaml.Annotations;
+
+namespace Focus.Apps.EasyNpc.Data;
 
 /// <summary>
 /// Actions that can be taken when an NPC - or an NPC's custom race, depending on the
 /// <see cref="CustomRaceBehavior"/> - is using a modded Worn Armor (e.g. custom body or wig).
 /// </summary>
+[YamlObject(NamingConvention.UpperCamelCase)]
 public enum WornArmorBehavior
 {
     /// <summary>

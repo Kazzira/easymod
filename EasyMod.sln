@@ -72,6 +72,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Focus.Apps.EasyNpc.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Focus.Apps.EasyNpc.Framework", "Focus.Apps.EasyNpc.Framework\Focus.Apps.EasyNpc.Framework.csproj", "{A9722D90-37DB-4492-BB19-97C623A969B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Focus.Apps.EasyNpc.Cli", "Focus.Apps.EasyNpc.Cli\Focus.Apps.EasyNpc.Cli.csproj", "{EBBFA2C0-F975-410A-8643-A85AA5B48EEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -370,6 +372,18 @@ Global
 		{A9722D90-37DB-4492-BB19-97C623A969B1}.Release|x64.Build.0 = Release|Any CPU
 		{A9722D90-37DB-4492-BB19-97C623A969B1}.Release|x86.ActiveCfg = Release|Any CPU
 		{A9722D90-37DB-4492-BB19-97C623A969B1}.Release|x86.Build.0 = Release|Any CPU
+		{EBBFA2C0-F975-410A-8643-A85AA5B48EEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBBFA2C0-F975-410A-8643-A85AA5B48EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBBFA2C0-F975-410A-8643-A85AA5B48EEF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EBBFA2C0-F975-410A-8643-A85AA5B48EEF}.Debug|x64.Build.0 = Debug|Any CPU
+		{EBBFA2C0-F975-410A-8643-A85AA5B48EEF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EBBFA2C0-F975-410A-8643-A85AA5B48EEF}.Debug|x86.Build.0 = Debug|Any CPU
+		{EBBFA2C0-F975-410A-8643-A85AA5B48EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBBFA2C0-F975-410A-8643-A85AA5B48EEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBBFA2C0-F975-410A-8643-A85AA5B48EEF}.Release|x64.ActiveCfg = Release|Any CPU
+		{EBBFA2C0-F975-410A-8643-A85AA5B48EEF}.Release|x64.Build.0 = Release|Any CPU
+		{EBBFA2C0-F975-410A-8643-A85AA5B48EEF}.Release|x86.ActiveCfg = Release|Any CPU
+		{EBBFA2C0-F975-410A-8643-A85AA5B48EEF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

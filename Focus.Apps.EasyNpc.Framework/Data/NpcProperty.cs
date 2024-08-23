@@ -1,135 +1,137 @@
-﻿using System.Runtime.Serialization;
+﻿using FastEnumUtility;
+using VYaml.Annotations;
 
 namespace Focus.Apps.EasyNpc.Data;
 
+[YamlObject(NamingConvention.UpperCamelCase)]
 public enum NpcProperty
 {
-    [EnumMember(Value = "AIDT")]
+    [Label("AIDT")]
     AIData,
 
-    [EnumMember(Value = "PKID")]
+    [Label("PKID")]
     AIPackages,
 
-    [EnumMember(Value = "ATKD")]
+    [Label("ATKD")]
     AttackData,
 
-    [EnumMember(Value = "ATKR")]
+    [Label("ATKR")]
     AttackRace,
 
-    [EnumMember(Value = "ANAM")]
+    [Label("ANAM")]
     AwayModelName,
 
-    [EnumMember(Value = "ACBS")]
+    [Label("ACBS")]
     BaseStats,
 
-    [EnumMember(Value = "CNAM")]
+    [Label("CNAM")]
     Class,
 
-    [EnumMember(Value = "ECOR")]
+    [Label("ECOR")]
     CombatOverridePackageList,
 
-    [EnumMember(Value = "ZNAM")]
+    [Label("ZNAM")]
     CombatStyle,
 
-    [EnumMember(Value = "ACBS.F")]
-    ConfigurationFlags,
-
-    [EnumMember(Value = "CRIF")]
+    [Label("CRIF")]
     CrimeFaction,
 
-    [EnumMember(Value = "INAM")]
+    [Label("INAM")]
     DeathItem,
 
-    [EnumMember(Value = "DOFT")]
+    [Label("DOFT")]
     DefaultOutfit,
 
-    [EnumMember(Value = "DPLT")]
+    [Label("DPLT")]
     DefaultPackageList,
 
-    [EnumMember(Value = "DEST")]
+    [Label("DEST")]
     DestructionData,
 
-    [EnumMember(Value = "NAM9")]
+    [Label("NAM9")]
     FaceMorphs,
 
-    [EnumMember(Value = "NAMA")]
+    [Label("NAMA")]
     FaceParts,
 
-    [EnumMember(Value = "FTST")]
+    [Label("FTST")]
     FaceTextureSet,
 
-    [EnumMember(Value = "SNAM")]
+    [Label("SNAM")]
     Faction,
 
-    [EnumMember(Value = "FULL")]
+    [Label("FULL")]
     FullName,
 
-    [EnumMember(Value = "GNAM")]
+    [Label("ACBS.F")]
+    GenderFlags,
+
+    [Label("GNAM")]
     GiftFilter,
 
-    [EnumMember(Value = "GWOR")]
+    [Label("GWOR")]
     GuardWarnOverridePackageList,
 
-    [EnumMember(Value = "PNAM")]
+    [Label("PNAM")]
     HeadParts,
 
-    [EnumMember(Value = "HCLF")]
+    [Label("HCLF")]
     HairColor,
 
-    [EnumMember(Value = "NAM6")]
+    [Label("NAM6")]
     Height,
 
-    [EnumMember(Value = "KWDA")]
+    [Label("KWDA")]
     Keywords,
 
-    [EnumMember(Value = "OCOR")]
+    [Label("OCOR")]
     ObserveDeadBodyOverridePackageList,
 
-    [EnumMember(Value = "PRKR")]
+    [Label("PRKR")]
     Perks,
 
-    [EnumMember(Value = "RNAM")]
+    [Label("RNAM")]
     Race,
 
-    [EnumMember(Value = "VMAD")]
+    [Label("VMAD")]
     ScriptInfo,
 
-    [EnumMember(Value = "SHRT")]
+    [Label("SHRT")]
     ShortName,
 
-    [EnumMember(Value = "DNAM")]
+    [Label("DNAM")]
     Skills,
 
-    [EnumMember(Value = "QNAM")]
+    [Label("QNAM")]
     SkinTone,
 
-    [EnumMember(Value = "SOFT")]
+    [Label("SOFT")]
     SleepOutfit,
 
-    [EnumMember(Value = "NAM8")]
+    [Label("NAM8")]
     SoundLevel,
 
-    [EnumMember(Value = "CSDT")]
-    SoundType,
+    [Label("CSDT")]
+    SoundTypes,
 
-    [EnumMember(Value = "SPOR")]
+    [Label("SPOR")]
     SpectatorOverridePackageList,
 
-    [EnumMember(Value = "SPLO")]
+    [Label("SPLO")]
     Spells,
 
-    [EnumMember(Value = "TPLT")]
+    [Label("TPLT")]
     Template,
 
-    [EnumMember(Value = "TINI")]
+    [Label("TINI")]
     TintLayers,
 
-    [EnumMember(Value = "VTCK")]
+    [Label("VTCK")]
     VoiceType,
 
-    [EnumMember(Value = "NAM7")]
+    [Label("NAM7")]
     Weight,
 
-    [EnumMember(Value = "WNAM")]
+    [Label("WNAM")]
     WornArmor,
 }
