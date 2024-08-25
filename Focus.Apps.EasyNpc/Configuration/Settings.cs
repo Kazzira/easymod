@@ -120,7 +120,7 @@ public class Settings : IAppSettings, IMutableAppSettings, IObservableAppSetting
             MugshotsDirectory = data.MugshotsDirectory;
         if (data.RaceTransformationKeys is not null)
             RaceTransformationKeys = data
-                .RaceTransformationKeys.Select(RecordKey.Parse)
+                .RaceTransformationKeys.Select(key => RecordKey.Parse(key))
                 .ToList()
                 .AsReadOnly();
         if (data.UseModManagerForModDirectory.HasValue)

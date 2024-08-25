@@ -3,7 +3,7 @@
   <Import Project="..\EasyMod.props" />
 
   <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyTitle>Service implementations based on the Mutagen library</AssemblyTitle>
   </PropertyGroup>
 
