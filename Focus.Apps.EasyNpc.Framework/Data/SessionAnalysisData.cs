@@ -5,7 +5,7 @@ namespace Focus.Apps.EasyNpc.Data;
 /// <summary>
 /// Holds the most recent analysis results for a given profile.
 /// </summary>
-public class AnalysisCacheData
+public class SessionAnalysisData
 {
     /// <summary>
     /// Per-mod analysis results.

@@ -9,7 +9,9 @@
 
   <ItemGroup>
     <PackageReference Include="FastEnum" />
+    <PackageReference Include="Mutagen.Bethesda" />
     <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="System.Windows.Extensions" />
     <PackageReference Include="VYaml" />
   </ItemGroup>
 

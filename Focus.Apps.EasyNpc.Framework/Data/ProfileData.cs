@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Focus.Apps.EasyNpc.Annotations;
+using Newtonsoft.Json;
 using VYaml.Annotations;
 
 namespace Focus.Apps.EasyNpc.Data;

@@ -9,9 +9,9 @@ namespace Focus.Apps.EasyNpc.Rules;
 /// </summary>
 /// <param name="profile">The current profile containing mod and NPC rules.</param>
 /// <param name="analysis">Analysis results from the mods/load order.</param>
-public class ProfileRules(ProfileData profile, AnalysisCacheData analysis)
+public class ProfileRules(ProfileData profile, SessionAnalysisData analysis)
 {
-    private readonly AnalysisCacheData analysis = analysis;
+    private readonly SessionAnalysisData analysis = analysis;
     private readonly ProfileData profile = profile;
 
     /// <summary>
