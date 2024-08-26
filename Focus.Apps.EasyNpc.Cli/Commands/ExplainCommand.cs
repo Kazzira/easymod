@@ -10,7 +10,7 @@ using Spectre.Console;
 using Spectre.Console.Cli;
 using VYaml.Serialization;
 
-namespace Focus.Apps.EasyNpc.Cli;
+namespace Focus.Apps.EasyNpc.Cli.Commands;
 
 using Environment = System.Environment;
 
@@ -89,7 +89,7 @@ public class ExplainCommand(IAnsiConsole console, ILogger logger)
                         profile
                     );
                     using var analyzerProgress = new ProgressAccumulator(analyzer);
-                    var analysisTask = analyzer.Analyze();
+                    var analysisTask = analyzer.AnalyzeAsync();
                     while (!analysisTask.IsCompleted)
                     {
                         var progress = analyzerProgress.GetLatest();

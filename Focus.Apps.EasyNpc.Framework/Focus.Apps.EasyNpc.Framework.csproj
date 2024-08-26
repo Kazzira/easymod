@@ -9,6 +9,9 @@
 
   <ItemGroup>
     <PackageReference Include="FastEnum" />
+    <PackageReference Include="ini-parser">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
     <PackageReference Include="Mutagen.Bethesda" />
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="System.Windows.Extensions" />

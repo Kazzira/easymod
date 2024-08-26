@@ -1,4 +1,7 @@
-﻿namespace Focus.Apps.EasyNpc.Data;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace Focus.Apps.EasyNpc.Data;
 
 /// <summary>
 /// A single component of a mod, more commonly known as a "file" on Nexus Mods and other mod sites,
@@ -30,6 +33,18 @@ public class ModComponent
     /// Path to this component's files on disk, relative to the mod search path.
     /// </summary>
     public string Path { get; set; } = "";
+
+    /// <summary>
+    /// External sources where the component or its source file can be found.
+    /// </summary>
+    /// <remarks>
+    /// These are generally used as additional resolution keys. If a component is renamed,
+    /// reinstalled under a different name, or changed in any other way that might cause its
+    /// <see cref="Key"/> to be different, the sources serve as secondary keys enabling the mod to
+    /// be associated with the version previously present, keeping the same <see cref="Key"/> and
+    /// having its <see cref="Name"/> and <see cref="Path"/> updated instead.
+    /// </remarks>
+    public List<ModComponentSource> Sources { get; set; } = [];
 }
 
 /// <summary>
@@ -41,6 +56,7 @@ public class ModComponentSource
     /// Identifies the source type or "namespace" of the component in which the <see cref="Id"/> is
     /// unique.
     /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
     public ModComponentSourceType Type { get; set; }
 
     /// <summary>
@@ -57,5 +73,5 @@ public enum ModComponentSourceType
     /// <summary>
     /// An individual file on Nexus mods, which is a specific version and belongs to a specific mod.
     /// </summary>
-    NexusFile,
+    NexusFile = 1,
 }

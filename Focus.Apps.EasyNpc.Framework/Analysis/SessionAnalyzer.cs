@@ -17,7 +17,7 @@ public class SessionAnalyzer<TMod, TNpc>(
     private readonly IPropertyDiffer<TNpc, NpcProperty> differ = differ;
     private readonly ProfileData profile = profile;
 
-    public async Task<SessionAnalysisData> Analyze()
+    public async Task<SessionAnalysisData> AnalyzeAsync()
     {
         var npcIds = environment.LinkCache.AllIdentifiers<TNpc>().ToList();
         int currentIndex = -1;

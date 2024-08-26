@@ -27,8 +27,14 @@ public partial class ProfileData
     /// Path to the game directory, if targeting a path different from the normal installation
     /// directory and/or the mod manager's target directory.
     /// </summary>
-    [YamlMember("path")]
-    public string? GamePath { get; set; } = null;
+    [YamlMember("gamePath")]
+    public string? GameDirectoryPath { get; set; } = null;
+
+    /// <summary>
+    /// Path to the root directory for mods.
+    /// </summary>
+    [YamlMember("modPath")]
+    public string ModDirectoryPath { get; set; } = "";
 
     /// <summary>
     /// Default merging behaviors for mods that do not override them.

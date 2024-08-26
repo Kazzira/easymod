@@ -1,4 +1,7 @@
-﻿namespace Focus.Apps.EasyNpc.Data;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace Focus.Apps.EasyNpc.Data;
 
 /// <summary>
 /// Contains information retrieved about a mod, for cross-session tracking, UI hints, etc.
@@ -53,6 +56,7 @@ public class ModSource
     /// <summary>
     /// Identifies the source type or "namespace" of the mod in which the <see cref="Id"/> is unique.
     /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
     public ModSourceType Type { get; set; }
 
     /// <summary>
@@ -69,5 +73,5 @@ public enum ModSourceType
     /// <summary>
     /// A mod page on Nexus Mods.
     /// </summary>
-    NexusMod,
+    NexusMod = 1,
 }
