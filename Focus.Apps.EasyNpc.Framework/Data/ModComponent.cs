@@ -27,7 +27,7 @@ public class ModComponent
     public string Name { get; set; } = "";
 
     /// <summary>
-    /// Path to this component's files on disk.
+    /// Path to this component's files on disk, relative to the mod search path.
     /// </summary>
     public string Path { get; set; } = "";
 }

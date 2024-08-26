@@ -26,6 +26,23 @@ public class ModManifest
     /// Other known names for this mod, used to help find mugshots or other related assets.
     /// </summary>
     public List<string> AlternateNames { get; set; } = [];
+
+    /// <summary>
+    /// External sources where the mod can be found.
+    /// </summary>
+    /// <remarks>
+    /// These are generally used as additional resolution keys. If a mod is renamed, reinstalled
+    /// under a different name, or changed in any other way that might cause its <see cref="Key"/>
+    /// to be different, the sources serve as secondary keys enabling the mod to be associated with
+    /// the version previously present, keeping the same <see cref="Key"/> and having its
+    /// <see cref="Name"/> and <see cref="AlternateNames"/> updated instead.
+    /// </remarks>
+    public List<ModSource> Sources { get; set; } = [];
+
+    /// <summary>
+    /// The components belonging to this mod.
+    /// </summary>
+    public List<ModComponent> Components { get; set; } = [];
 }
 
 /// <summary>
