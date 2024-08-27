@@ -35,8 +35,7 @@ public class ScanCommand(IAnsiConsole console, ProfileSelector profileSelector, 
                         profile.ModDirectoryPath
                     );
                     var modRepository = new ModOrganizerModRepository(profile.ModDirectoryPath);
-                    var registryBuilder = new ModRegistryBuilder(modRepository);
-                    var registryData = await registryBuilder.BuildAsync();
+                    var registryData = await modRepository.GetModRegistryAsync();
                     logger.Information("Mod indexing completed.");
                     var json = JsonConvert.SerializeObject(registryData);
                     console.Write(

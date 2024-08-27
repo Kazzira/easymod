@@ -1,17 +1,23 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 using Focus.Apps.EasyNpc.Data;
 
 namespace Focus.Apps.EasyNpc.ModManagers.ModOrganizer;
 
-public partial class ModOrganizerModRepository(string directoryPath) : IModRepository
+public partial class ModOrganizerModRepository(string instanceDirectoryPath) : IModRepository
 {
     private static readonly string REPOSITORY_LOCAL = "Local";
 
-    private readonly string directoryPath = directoryPath;
+    private readonly Lazy<Task<ConfigIni>> configTask =
+        new(
+            () => ConfigIni.LoadFromFile(Path.Combine(instanceDirectoryPath, "ModOrganizer.ini")),
+            true
+        );
 
-    public async IAsyncEnumerable<ModManifest> GetMods()
+    public async Task<ModRegistryData> GetModRegistryAsync()
     {
-        var componentDirectories = Directory.GetDirectories(directoryPath);
+        var config = await configTask.Value;
+        var componentDirectories = Directory.GetDirectories(config.Settings.ModsDirectory);
         var modsById = new Dictionary<string, ModManifest>();
         await Parallel.ForEachAsync(
             componentDirectories,
@@ -83,9 +89,47 @@ public partial class ModOrganizerModRepository(string directoryPath) : IModRepos
                 }
             }
         );
-        foreach (var mod in modsById.Values)
+        var mods = modsById.Values.ToList();
+        var componentKeysByPath = mods.SelectMany(mod => mod.Components)
+            .ToDictionary(c => c.Path, c => c.Key);
+        var order = await GetOrder(componentKeysByPath).ToListAsync();
+        order.Reverse();
+        return new() { Mods = mods, Order = order };
+    }
+
+    private async IAsyncEnumerable<ModOrderEntry> GetOrder(
+        IReadOnlyDictionary<string, string> componentKeysByPath
+    )
+    {
+        var config = await configTask.Value;
+        if (string.IsNullOrEmpty(config.General.SelectedProfile))
         {
-            yield return mod;
+            yield break;
+        }
+        var modListPath = Path.Combine(
+            config.Settings.ProfilesDirectory,
+            config.General.SelectedProfile,
+            "modlist.txt"
+        );
+        if (!File.Exists(modListPath))
+        {
+            yield break;
+        }
+        using var stream = File.OpenRead(modListPath);
+        using var reader = new StreamReader(stream);
+        string? nextLine;
+        while ((nextLine = await reader.ReadLineAsync()) is not null)
+        {
+            bool isEnabled = nextLine.StartsWith('+');
+            var componentPath = isEnabled ? nextLine[1..] : nextLine;
+            if (componentKeysByPath.TryGetValue(componentPath, out var componentKey))
+            {
+                yield return new() { ComponentKey = componentKey, IsEnabled = isEnabled };
+            }
+            else
+            {
+                Debugger.Break();
+            }
         }
     }
 

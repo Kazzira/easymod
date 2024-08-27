@@ -8,11 +8,8 @@ namespace Focus.Apps.EasyNpc.ModManagers;
 public interface IModRepository
 {
     /// <summary>
-    /// Gets the set of all installed mods, and their components.
+    /// Gets the current mod registry information, including installed mods, components, orders
+    /// and configurations.
     /// </summary>
-    /// <remarks>
-    /// Since it is generally the individual <see cref="ModComponent"/>s that have priorities,
-    /// results are not guaranteed to be in any particular order.
-    /// </remarks>
-    IAsyncEnumerable<ModManifest> GetMods();
+    Task<ModRegistryData> GetModRegistryAsync();
 }

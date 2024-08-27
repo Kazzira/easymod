@@ -33,10 +33,6 @@ internal class MetaIni(IniData data)
         public string FirstModId { get; } = data[@"1\modid"];
     }
 
-    public GeneralSection General { get; } = new(data["General"] ?? new());
-
-    public InstalledFilesSection InstalledFiles { get; } = new(data["installedFiles"] ?? new());
-
     /// <summary>
     /// Loads the metadata from a file.
     /// </summary>
@@ -46,4 +42,8 @@ internal class MetaIni(IniData data)
         var data = await Ini.LoadFromFile(path);
         return new(data);
     }
+
+    public GeneralSection General { get; } = new(data["General"] ?? new());
+
+    public InstalledFilesSection InstalledFiles { get; } = new(data["installedFiles"] ?? new());
 }

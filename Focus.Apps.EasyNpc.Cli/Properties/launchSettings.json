@@ -1,8 +1,12 @@
 {
   "profiles": {
-    "Focus.Apps.EasyNpc.Cli": {
+    "Explain": {
       "commandName": "Project",
       "commandLineArgs": "explain Delphine"
+    },
+    "Scan": {
+      "commandName": "Project",
+      "commandLineArgs": "scan"
     }
   }
 }
