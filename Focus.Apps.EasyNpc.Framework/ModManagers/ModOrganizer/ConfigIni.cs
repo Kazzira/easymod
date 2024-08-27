@@ -2,6 +2,12 @@
 
 namespace Focus.Apps.EasyNpc.ModManagers.ModOrganizer;
 
+/// <summary>
+/// Wrapper for Mod Organizer's root configuration file (<c>ModOrganizer.ini</c>).
+/// </summary>
+/// <param name="data">Data from the INI file.</param>
+/// <param name="instanceDirectoryPath">Location of the instance. Required for when
+/// <paramref name="data"/> does not explicitly define a base directory.</param>
 internal class ConfigIni(IniData data, string instanceDirectoryPath)
 {
     public class GeneralSection(KeyDataCollection data)

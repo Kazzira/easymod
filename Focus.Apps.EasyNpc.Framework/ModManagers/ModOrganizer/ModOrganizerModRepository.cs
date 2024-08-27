@@ -94,7 +94,12 @@ public partial class ModOrganizerModRepository(string instanceDirectoryPath) : I
             .ToDictionary(c => c.Path, c => c.Key);
         var order = await GetOrder(componentKeysByPath).ToListAsync();
         order.Reverse();
-        return new() { Mods = mods, Order = order };
+        return new()
+        {
+            RootDirectory = config.Settings.ModsDirectory,
+            Mods = mods,
+            Order = order,
+        };
     }
 
     private async IAsyncEnumerable<ModOrderEntry> GetOrder(

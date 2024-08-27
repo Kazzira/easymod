@@ -7,6 +7,14 @@
 public class ModRegistryData
 {
     /// <summary>
+    /// Absolute path of the directory containing mods.
+    /// </summary>
+    /// <remarks>
+    /// Each <see cref="ModComponent.Path"/> is relative to this root.
+    /// </remarks>
+    public string RootDirectory { get; set; } = "";
+
+    /// <summary>
     /// The list of known mods.
     /// </summary>
     public List<ModManifest> Mods { get; set; } = [];
