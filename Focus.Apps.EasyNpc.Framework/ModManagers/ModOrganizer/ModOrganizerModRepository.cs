@@ -1,22 +1,32 @@
-﻿using System.Diagnostics;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Focus.Apps.EasyNpc.Data;
 
 namespace Focus.Apps.EasyNpc.ModManagers.ModOrganizer;
 
-public partial class ModOrganizerModRepository(string instanceDirectoryPath) : IModRepository
+/// <summary>
+/// Mod repository implementation based on a Mod Organizer instance.
+/// </summary>
+public partial class ModOrganizerModRepository : IModRepository
 {
     private static readonly string REPOSITORY_LOCAL = "Local";
 
-    private readonly Lazy<Task<ConfigIni>> configTask =
-        new(
-            () => ConfigIni.LoadFromFile(Path.Combine(instanceDirectoryPath, "ModOrganizer.ini")),
-            true
-        );
+    private readonly Task<ConfigIni> configTask;
+
+    internal ModOrganizerModRepository(Task<ConfigIni> configTask)
+    {
+        this.configTask = configTask;
+    }
+
+    // HACK: Doesn't belong in this abstraction, just testing.
+    public async Task<string?> GetGameDirectoryAsync()
+    {
+        var config = await configTask;
+        return config.General.GamePath;
+    }
 
     public async Task<ModRegistryData> GetModRegistryAsync()
     {
-        var config = await configTask.Value;
+        var config = await configTask;
         var componentDirectories = Directory.GetDirectories(config.Settings.ModsDirectory);
         var modsById = new Dictionary<string, ModManifest>();
         await Parallel.ForEachAsync(
@@ -94,19 +104,14 @@ public partial class ModOrganizerModRepository(string instanceDirectoryPath) : I
             .ToDictionary(c => c.Path, c => c.Key);
         var order = await GetOrder(componentKeysByPath).ToListAsync();
         order.Reverse();
-        return new()
-        {
-            RootDirectory = config.Settings.ModsDirectory,
-            Mods = mods,
-            Order = order,
-        };
+        return new() { Mods = mods, Order = order };
     }
 
     private async IAsyncEnumerable<ModOrderEntry> GetOrder(
         IReadOnlyDictionary<string, string> componentKeysByPath
     )
     {
-        var config = await configTask.Value;
+        var config = await configTask;
         if (string.IsNullOrEmpty(config.General.SelectedProfile))
         {
             yield break;
@@ -130,10 +135,6 @@ public partial class ModOrganizerModRepository(string instanceDirectoryPath) : I
             if (componentKeysByPath.TryGetValue(componentPath, out var componentKey))
             {
                 yield return new() { ComponentKey = componentKey, IsEnabled = isEnabled };
-            }
-            else
-            {
-                Debugger.Break();
             }
         }
     }

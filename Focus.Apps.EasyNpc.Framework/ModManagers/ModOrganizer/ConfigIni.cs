@@ -12,7 +12,7 @@ internal class ConfigIni(IniData data, string instanceDirectoryPath)
 {
     public class GeneralSection(KeyDataCollection data)
     {
-        public string DataPath => AddDataSuffix(GamePath ?? "");
+        public string? DataPath => AddDataSuffix(GamePath ?? "");
         public string? GameName { get; } = data["gameName"];
         public string? GamePath { get; } = UnescapePath(UnwrapString(data["gamePath"]));
         public string? SelectedProfile { get; } = UnwrapString(data["selected_profile"]);
@@ -73,10 +73,12 @@ internal class ConfigIni(IniData data, string instanceDirectoryPath)
     public SettingsSection Settings { get; } =
         new(data["Settings"] ?? new(), instanceDirectoryPath);
 
-    private static string AddDataSuffix(string gamePath)
+    private static string? AddDataSuffix(string? gamePath)
     {
         if (string.IsNullOrEmpty(gamePath))
+        {
             return gamePath;
+        }
         var leafDirectory = new DirectoryInfo(gamePath).Name;
         return leafDirectory.Equals("data", StringComparison.OrdinalIgnoreCase)
             ? gamePath

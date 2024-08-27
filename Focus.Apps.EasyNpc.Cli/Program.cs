@@ -1,5 +1,7 @@
 ﻿using Focus.Apps.EasyNpc.Cli;
 using Focus.Apps.EasyNpc.Cli.Commands;
+using Focus.Apps.EasyNpc.ModManagers;
+using Focus.Apps.EasyNpc.ModManagers.ModOrganizer;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Sinks.Spectre;
@@ -12,15 +14,19 @@ var logger = Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Verbose()
     .CreateLogger();
 var services = new ServiceCollection();
-using var registrar = new DependencyInjectionRegistrar(services);
-registrar.RegisterInstance(typeof(ILogger), logger);
-registrar.RegisterInstance(
-    typeof(ProfileSelector),
-    new ProfileSelector(AnsiConsole.Console, Environment.SpecialFolder.LocalApplicationData, logger)
+services.AddSingleton(logger);
+services.AddSingleton<ProfileSelector>(provider =>
+    new(
+        provider.GetRequiredService<IAnsiConsole>(),
+        Environment.SpecialFolder.LocalApplicationData,
+        provider.GetRequiredService<ILogger>()
+    )
 );
-var app = new CommandApp(registrar);
+services.AddSingleton<IModManagerFactory>(new ModOrganizerFactory());
+var app = new CommandApp(new DependencyInjectionRegistrar(services));
 app.Configure(config =>
 {
+    config.PropagateExceptions();
     config
         .AddCommand<ExplainCommand>("explain")
         .WithDescription("Provide details on how a specific NPC will be merged.")
