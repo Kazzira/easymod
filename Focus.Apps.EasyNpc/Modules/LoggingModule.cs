@@ -33,8 +33,8 @@ namespace Focus.Apps.EasyNpc.Modules
                     .Enrich.WithThreadId()
                     .CreateLogger();
             log.Information(
-                "Initialized: {appName:l} version {version:l}, built on {buildDate}",
-                AssemblyProperties.Name, AssemblyProperties.Version, AssemblyProperties.BuildTimestampUtc);
+                "Initialized: {appName:l} version {version:l}",
+                AssemblyProperties.Name, AssemblyProperties.Version);
             if (Level <= LogEventLevel.Debug)
                 log.Debug("Debug mode enabled");
 
